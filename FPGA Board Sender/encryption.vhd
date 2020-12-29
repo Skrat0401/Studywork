@@ -22,6 +22,15 @@
              CDOUT        : out unsigned(7 downto 0));   
       end component;
       
+      component memory_target is
+         port ( 
+             Clk              : in  std_logic;
+             Target_EN_ADDR   : in  unsigned (7 downto 0); 
+             data_in          : in  unsigned (7 downto 0); 
+             output_addr      : in  unsigned (7 downto 0); 
+             data_out         : out unsigned (7 downto 0));    
+      end component;
+      
       component Random_Number_8
           port(
               Clk    : in  std_logic;
@@ -44,15 +53,28 @@
       end component Key;
       
       signal Source_EN_ADDR : unsigned(7 downto 0) := "00000000";
-      signal DReg, DOut     : unsigned(7 downto 0);
+      signal DReg     : unsigned(7 downto 0);
       signal RanNum         : unsigned(7 downto 0);
       signal KeyInInt       : unsigned(7 downto 0);
       signal reset_Number   : std_logic;
       signal counter        : integer;
-      signal ADDRKey       : std_logic_vector(7 downto 0);
+      signal ADDRKey        : std_logic_vector(7 downto 0);
       signal clockcounter   : unsigned (15 downto 0):= (others=>'0');
-      signal outputclock   : std_logic;
+      signal outputclock    : std_logic;
+      signal Target_EN_ADDR : unsigned (7 downto 0);
+      signal data_in : unsigned (7 downto 0);
+      signal output_addr : unsigned (7 downto 0);
+      signal data_out : unsigned (7 downto 0);
+      signal outputcounter : integer;
   begin 
+      target_mem_E: memory_target
+      port map (
+          Clk  => Clk,            
+          Target_EN_ADDR => Target_EN_ADDR,   
+          data_in => data_in, 
+          output_addr =>  output_addr,    
+          data_out =>  data_out       
+      );
      
       source_mem_E: memory_source 
       port map (
@@ -95,31 +117,38 @@ AddressKey : process (Clk) begin
 
 end process AddressKey;
 
-Output_serial : process (clk) begin
+Output_serial : process (outputclock) begin
    if(enable = '1') then
-    if rising_edge(Clk) then
-     --       output <=  output auf langsamere clock ->process hinzufügen
+    if (rising_edge(outputclock)) then
+        if (outputcounter < 8) then
+            output <= data_out[outputcounter];
+        else
+            output_addr <= output_addr + 1;
+            outputcounter <= 0;
+        end if;
+        
     end if;
   end if;      
 end process Output_serial;
 
-encryption : process(Clk,Rst) begin
+encryption : process (Clk,Rst) begin
     if(Rst = '0') then
         Source_EN_ADDR <= "00000000";
+        Target_EN_ADDR <= "00000000";
+        output_addr <= "00000000";
         reset_Number <= '0';
+        outputcounter <= 0;
         counter <= 0;
     end if;
    if(enable = '1') then
     if(counter < 65) then  
            if rising_edge(Clk) then
-             DOut <= RanNum xor DReg;
+             data_in <= RanNum xor DReg;
              Source_EN_ADDR <= Source_EN_ADDR + 1;
+             Target_EN_ADDR <= Target_EN_ADDR + 1;
              counter <= counter + 1;
            end if;
     end if; 
   end if; 
 end process encryption;
-
-
-
-    end RTL;
+end RTL;
