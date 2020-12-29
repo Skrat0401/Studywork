@@ -32,7 +32,7 @@
           );
       end component Random_Number_8;
       
-      component ROMKey
+      component Key
           generic(
               L_BITS : natural;
               M_BITS : natural
@@ -41,7 +41,7 @@
               ADDR : in  std_logic_vector(L_BITS - 1 downto 0);
               DATA : out unsigned(M_BITS - 1 downto 0)
           );
-      end component ROMKey;
+      end component Key;
       
       signal Source_EN_ADDR : unsigned(7 downto 0) := "00000000";
       signal DReg, DOut     : unsigned(7 downto 0);
@@ -49,7 +49,9 @@
       signal KeyInInt       : unsigned(7 downto 0);
       signal reset_Number   : std_logic;
       signal counter        : integer;
-      signal  ADDRKey       :  std_logic_vector(7 downto 0);
+      signal ADDRKey       : std_logic_vector(7 downto 0);
+      signal clockcounter   : unsigned (15 downto 0):= (others=>'0');
+      signal outputclock   : std_logic;
   begin 
      
       source_mem_E: memory_source 
@@ -66,14 +68,23 @@
           reset_Number => reset_Number,
           RanNum => RanNum);
           
-      ROMKey_mem : ROMKey  
+      ROMKey_mem : Key  
       generic map(
           L_BITS => 8, 
           M_BITS => 8) 
       port map (
            ADDR => ADDRKey,
            DATA => KeyInInt);
-
+           
+slowclock : process (Clk) begin -- Prozess für die Outputclock
+    if (rising_edge(Clk)) then
+        if (clockcounter < 100000) then clockcounter <= clockcounter + 1;
+        else
+            clockcounter <= "0000000000000000";
+            outputclock <= not outputclock;
+        end if;
+    end if;
+end process slowclock;
 
 AddressKey : process (Clk) begin
   if(enable = '1') then
