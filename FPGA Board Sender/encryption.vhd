@@ -122,8 +122,9 @@ Output_serial : process (outputclock) begin
     if (rising_edge(outputclock)) then
         if (outputcounter < 8) then
             output <= data_out[outputcounter]; 
-            output_addr <= output_addr + 1;
+            outputcounter <= outputcounter +1;
         else
+            output_addr <= output_addr + 1;
             outputcounter <= 0;
         end if;
         
