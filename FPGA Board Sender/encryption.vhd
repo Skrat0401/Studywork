@@ -100,7 +100,7 @@
            
 slowclock : process (Clk) begin -- Prozess für die Outputclock
     if (rising_edge(Clk)) then
-        if (clockcounter < 100000) then clockcounter <= clockcounter + 1;
+        if (clockcounter < 100000) then clockcounter <= clockcounter + 1; -- 1kHz
         else
             clockcounter <= "0000000000000000";
             outputclock <= not outputclock;
@@ -108,7 +108,7 @@ slowclock : process (Clk) begin -- Prozess für die Outputclock
     end if;
 end process slowclock;
 
-AddressKey : process (Clk) begin
+AddressKey : process (Clk, enable) begin
   if(enable = '1') then
     if rising_edge(Clk) then
              ADDRKey <= sw;
@@ -117,7 +117,7 @@ AddressKey : process (Clk) begin
 
 end process AddressKey;
 
-Output_serial : process (outputclock) begin
+Output_serial : process (outputclock, enable) begin
    if(enable = '1') then
     if (rising_edge(outputclock)) then
         if (outputcounter < 8) then
@@ -132,7 +132,7 @@ Output_serial : process (outputclock) begin
   end if;      
 end process Output_serial;
 
-encryption : process (Clk,Rst) begin
+encryption : process (Clk,Rst, enable) begin
     if(Rst = '0') then
         Source_EN_ADDR <= "00000000";
         Target_EN_ADDR <= "00000000";
