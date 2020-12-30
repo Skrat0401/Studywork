@@ -52,7 +52,7 @@
           );
       end component Key;
       
-      signal Source_EN_ADDR : unsigned(7 downto 0) := "00000000";
+      signal Source_EN_ADDR : unsigned(7 downto 0);
       signal DReg           : unsigned(7 downto 0);
       signal RanNum         : unsigned(7 downto 0);
       signal KeyInInt       : unsigned(7 downto 0);
@@ -61,7 +61,7 @@
       signal ADDRKey        : std_logic_vector(7 downto 0);
       signal clockcounter   : unsigned (15 downto 0):= (others=>'0');
       signal outputclock    : std_logic := '0';
-      signal Target_EN_ADDR : unsigned (7 downto 0);
+      signal Target_ADDR    : unsigned (7 downto 0);
       signal data_in        : unsigned (7 downto 0);
       signal output_addr    : unsigned (7 downto 0);
       signal data_out       : unsigned (7 downto 0);
@@ -70,7 +70,7 @@
       target_mem_E: memory_target
       port map (
           Clk  => Clk,            
-          Target_EN_ADDR => Target_EN_ADDR,   
+          Target_EN_ADDR => Target_ADDR,   
           data_in => data_in, 
           output_addr =>  output_addr,    
           data_out =>  data_out       
@@ -140,16 +140,15 @@ end process Output_serial;
 encryption : process (Clk,Rst, enable) begin
 if(Rst = '0') then
         Source_EN_ADDR <= "00000000";
-        Target_EN_ADDR <= "00000000";
+        Target_ADDR <= "00000000";
         reset_Number <= '0';
         counter <= 0;
-end if;
-   if(enable = '1') then
-    if(counter < 65) then  
+elsif(enable = '1') then
+    if(counter < 64) then  
            if rising_edge(Clk) then
              data_in <= RanNum xor DReg;
              Source_EN_ADDR <= Source_EN_ADDR + 1;
-             Target_EN_ADDR <= Target_EN_ADDR + 1;
+             Target_ADDR <= Target_ADDR + 1;
              counter <= counter + 1;
            end if;
     end if;
