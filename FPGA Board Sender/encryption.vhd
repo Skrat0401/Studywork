@@ -59,7 +59,7 @@
       signal reset_Number   : std_logic;
       signal counter        : integer;
       signal ADDRKey        : std_logic_vector(7 downto 0);
-      signal clockcounter   : unsigned (15 downto 0):= (others=>'0');
+      signal clockcounter   : unsigned (19 downto 0):= (others=>'0');
       signal outputclock    : std_logic := '0';
       signal Target_ADDR    : unsigned (7 downto 0);
       signal data_in        : unsigned (7 downto 0);
@@ -102,7 +102,7 @@ slowclock : process (Clk) begin -- Prozess für die Outputclock
     if (rising_edge(Clk)) then
         if (clockcounter < 100000) then clockcounter <= clockcounter + 1; -- 1kHz
         else
-            clockcounter <= "0000000000000000";
+            clockcounter <= "00000000000000000000";
             outputclock <= not outputclock;
         end if;
     end if;
@@ -118,15 +118,15 @@ AddressKey : process (Clk, enable) begin
 end process AddressKey;
 
 
-Output_serial : process (outputclock) begin
+Output_serial : process (clk) begin
  if(Rst = '0') then
      output_addr <= "00000000";
      outputcounter <= 0;
      output <= '0';
- end if;
-   if(enable = '1') then
+ 
+   elsif(enable = '1') then
     if (rising_edge(outputclock)) then
-        if (outputcounter < 8) then
+        if (outputcounter < 7) then
             output <= data_out(outputcounter); 
             outputcounter <= outputcounter + 1;
         else
@@ -144,7 +144,7 @@ if(Rst = '0') then
         reset_Number <= '0';
         counter <= 0;
 elsif(enable = '1') then
-    if(counter < 64) then  
+    if(counter < 63) then  
            if rising_edge(Clk) then
              data_in <= RanNum xor DReg;
              Source_EN_ADDR <= Source_EN_ADDR + 1;
