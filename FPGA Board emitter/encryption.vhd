@@ -8,7 +8,8 @@
             Rst     : in std_logic; --aktive low
             enable  : in std_logic; --switch r2
             sw      : in std_logic_vector (8 downto 1);
-            output  : out std_logic
+            output  : out std_logic;
+            LED_B   : out std_logic
            );
            
     end electricity_cipher;
@@ -104,6 +105,7 @@ slowclock : process (Clk) begin -- Prozess für die Outputclock
         else
             clockcounter <= "00000000000000000000";
             outputclock <= not outputclock;
+            LED_B <= '1'; --Test für programming device
         end if;
     end if;
 end process slowclock;
