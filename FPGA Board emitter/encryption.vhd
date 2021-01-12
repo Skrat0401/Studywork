@@ -67,6 +67,7 @@
       signal output_addr    : unsigned (7 downto 0);
       signal data_out       : unsigned (7 downto 0);
       signal outputcounter  : integer;
+      signal test           : integer;
   begin 
       target_mem_E: memory_target
       port map (
@@ -120,15 +121,17 @@ AddressKey : process (Clk, enable) begin
 end process AddressKey;
 
 
-Output_serial : process (clk) begin
+Output_serial : process (Rst, Outputclock, enable) begin
+    test <= test +1;
  if(Rst = '0') then
      output_addr <= "00000000";
      outputcounter <= 0;
      output <= '0';
- 
-   elsif(enable = '1') then
-    if (rising_edge(outputclock)) then
+     test <= 0;
+   --elsif(enable = '1') then
+   elsif (rising_edge(outputclock)) then
         if (outputcounter < 7) then
+          --  output <= '1';
             output <= data_out(outputcounter); 
             outputcounter <= outputcounter + 1;
         else
@@ -136,7 +139,7 @@ Output_serial : process (clk) begin
             outputcounter <= 0;
         end if;      
     end if;
-  end if;      
+      
 end process Output_serial;
 
 encryption : process (Clk,Rst, enable) begin

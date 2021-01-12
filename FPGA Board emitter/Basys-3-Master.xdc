@@ -108,8 +108,8 @@ set_property PACKAGE_PIN W4 [get_ports {MUXOut[3]}]
 
 
 ##Buttons
-set_property PACKAGE_PIN U18 [get_ports RS]
-	set_property IOSTANDARD LVCMOS33 [get_ports RS]
+set_property PACKAGE_PIN U18 [get_ports Rs]
+	set_property IOSTANDARD LVCMOS33 [get_ports Rs]
 #set_property PACKAGE_PIN T18 [get_ports btnU]
 	#set_property IOSTANDARD LVCMOS33 [get_ports btnU]
 #set_property PACKAGE_PIN W19 [get_ports btnL]
