@@ -67,7 +67,8 @@
       signal output_addr    : unsigned (7 downto 0);
       signal data_out       : unsigned (7 downto 0);
       signal outputcounter  : integer;
-      signal test           : integer;
+      signal test           : integer; 
+      
   begin 
       target_mem_E: memory_target
       port map (
