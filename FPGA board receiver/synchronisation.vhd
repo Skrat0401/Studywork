@@ -12,12 +12,12 @@ use IEEE.numeric_std.all;
 --use UNISIM.VComponents.all;
 
 entity synchronisation is
-    Port ( clk              : in STD_LOGIC;
-           Rst              : in STD_LOGIC;
+    Port ( clk              : in std_logic;
+           Rst              : in std_logic;
            LED_B            : out std_logic;
            syn_success      : out std_logic;
-           data_in          : in STD_LOGIC_VECTOR (11 downto 0);
-           data_out         : out STD_LOGIC_VECTOR (11 downto 0);
+           data_in_pin      : in std_logic;
+           data_out         : out STD_LOGIC_VECTOR (7 downto 0);
            syn_en           : in STD_LOGIC);
 end synchronisation;
 
@@ -35,7 +35,7 @@ begin
         if(Rst = '0') then
             dec <= '0';    
         elsif(rising_edge(synclock)) then
-            if(data_in > "011111111100") then
+            if(data_in_pin = '0') then
                 dec <= '1';
             else
                 dec <= '0';
