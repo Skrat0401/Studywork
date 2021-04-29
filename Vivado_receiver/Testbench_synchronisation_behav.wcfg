@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="Testbench_synchronisation_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="Testbench_synchronisation" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="30914337791fs"></ZoomStartTime>
+      <ZoomEndTime time="47774337792fs"></ZoomEndTime>
+      <Cursor1Time time="46637105000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="279"></NameColumnWidth>
+      <ValueColumnWidth column_width="170"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="26" />
+   <wvobject fp_name="/Testbench_synchronisation/T_Clk" type="logic">
+      <obj_property name="ElementShortName">T_Clk</obj_property>
+      <obj_property name="ObjectShortName">T_Clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/T_Rst" type="logic">
+      <obj_property name="ElementShortName">T_Rst</obj_property>
+      <obj_property name="ObjectShortName">T_Rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/T_data_in_pin" type="logic">
+      <obj_property name="ElementShortName">T_data_in_pin</obj_property>
+      <obj_property name="ObjectShortName">T_data_in_pin</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/T_syn_en" type="logic">
+      <obj_property name="ElementShortName">T_syn_en</obj_property>
+      <obj_property name="ObjectShortName">T_syn_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/T_data_out" type="array">
+      <obj_property name="ElementShortName">T_data_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">T_data_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/T_syn_success" type="logic">
+      <obj_property name="ElementShortName">T_syn_success</obj_property>
+      <obj_property name="ObjectShortName">T_syn_success</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/T_LED_B" type="logic">
+      <obj_property name="ElementShortName">T_LED_B</obj_property>
+      <obj_property name="ObjectShortName">T_LED_B</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/T_data" type="array">
+      <obj_property name="ElementShortName">T_data[30:0]</obj_property>
+      <obj_property name="ObjectShortName">T_data[30:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/T_clockcounter" type="array">
+      <obj_property name="ElementShortName">T_clockcounter[19:0]</obj_property>
+      <obj_property name="ObjectShortName">T_clockcounter[19:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/T_synclock" type="logic">
+      <obj_property name="ElementShortName">T_synclock</obj_property>
+      <obj_property name="ObjectShortName">T_synclock</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/T_data_counter" type="other">
+      <obj_property name="ElementShortName">T_data_counter</obj_property>
+      <obj_property name="ObjectShortName">T_data_counter</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/T_outputcounter" type="other">
+      <obj_property name="ElementShortName">T_outputcounter</obj_property>
+      <obj_property name="ObjectShortName">T_outputcounter</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/DUT/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/DUT/Rst" type="logic">
+      <obj_property name="ElementShortName">Rst</obj_property>
+      <obj_property name="ObjectShortName">Rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/DUT/LED_B" type="logic">
+      <obj_property name="ElementShortName">LED_B</obj_property>
+      <obj_property name="ObjectShortName">LED_B</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/DUT/syn_success" type="logic">
+      <obj_property name="ElementShortName">syn_success</obj_property>
+      <obj_property name="ObjectShortName">syn_success</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/DUT/data_in_pin" type="logic">
+      <obj_property name="ElementShortName">data_in_pin</obj_property>
+      <obj_property name="ObjectShortName">data_in_pin</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/DUT/data_out" type="array">
+      <obj_property name="ElementShortName">data_out[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data_out[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/DUT/syn_en" type="logic">
+      <obj_property name="ElementShortName">syn_en</obj_property>
+      <obj_property name="ObjectShortName">syn_en</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/DUT/reg" type="array">
+      <obj_property name="ElementShortName">reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/DUT/dec" type="logic">
+      <obj_property name="ElementShortName">dec</obj_property>
+      <obj_property name="ObjectShortName">dec</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/DUT/clockcounter" type="array">
+      <obj_property name="ElementShortName">clockcounter[19:0]</obj_property>
+      <obj_property name="ObjectShortName">clockcounter[19:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/DUT/synclock" type="logic">
+      <obj_property name="ElementShortName">synclock</obj_property>
+      <obj_property name="ObjectShortName">synclock</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/DUT/output_addr" type="array">
+      <obj_property name="ElementShortName">output_addr[7:0]</obj_property>
+      <obj_property name="ObjectShortName">output_addr[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/DUT/outputcounter" type="other">
+      <obj_property name="ElementShortName">outputcounter</obj_property>
+      <obj_property name="ObjectShortName">outputcounter</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Testbench_synchronisation/DUT/enable_data_out" type="logic">
+      <obj_property name="ElementShortName">enable_data_out</obj_property>
+      <obj_property name="ObjectShortName">enable_data_out</obj_property>
+   </wvobject>
+</wave_config>

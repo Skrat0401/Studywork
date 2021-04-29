@@ -27,6 +27,7 @@ architecture Behavioral of Testbench_synchronisation is
     signal T_clockcounter       : unsigned (19 downto 0):= (others=>'0');
     signal T_synclock           : std_logic := '0';
     signal T_data_counter       : integer;
+    signal T_outputcounter      : integer;
     
     component synchronisation
         Port ( 
@@ -65,22 +66,37 @@ count: process
  end process count;
  
  T_syn_en <= '1';
- T_data<= "0011111110010101010101001010100";
+ T_data<= "0011111111010101010101001010100";
  
      
 slowclock : process (T_Clk) begin
     if(T_Rst = '0') then
         T_clockcounter <= "00000000000000000000"; 
-        T_data_counter <= 0;
+        T_data_counter <= 30;
     elsif (rising_edge(T_Clk)) then
         if (T_clockcounter < 100000) then T_clockcounter <= T_clockcounter + 1; -- 1kHz
         else
             T_clockcounter <= "00000000000000000000";
             T_synclock <= not T_synclock;
-            T_data_in_pin <= T_data(T_data_counter);
-            T_data_counter <= T_data_counter + 1;
+       --     T_data_in_pin <= T_data(T_data_counter);        
         end if;
     end if;
-end process slowclock; 
+end process slowclock;
+ 
+Output_serial : process (T_Rst, T_synclock) begin
+ if(T_Rst = '0') then
+     T_outputcounter <= 30;
+     T_data_in_pin <= '0';
+   --elsif(enable = '1') then
+   elsif (rising_edge(T_synclock)) then
+   --     if (T_outputcounter < 7) then
+            T_data_in_pin <= T_data(T_outputcounter); 
+            T_outputcounter <= T_outputcounter - 1;
+   --     else
+    if(T_outputcounter < 1) then
+            T_outputcounter <= 0;
+        end if;      
+    end if;     
+end process Output_serial;
 
 end Behavioral;
