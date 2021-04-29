@@ -35,7 +35,7 @@ begin
         if(Rst = '0') then
             dec <= '0';    
         elsif(rising_edge(synclock)) then
-            if(data_in_pin = '0') then
+            if(data_in_pin = '1') then
                 dec <= '1';
             else
                 dec <= '0';
@@ -48,14 +48,14 @@ begin
             reg <= "00000000";
         elsif(rising_edge(synclock)) then
             if( syn_en = '1') then
-               reg(0) <= dec;
-               reg(1) <= reg(0);
-               reg(2) <= reg(1);
-               reg(3) <= reg(2);
-               reg(4) <= reg(3);
-               reg(5) <= reg(4);
-               reg(6) <= reg(5);
                reg(7) <= reg(6);
+               reg(6) <= reg(5);
+               reg(5) <= reg(4);
+               reg(4) <= reg(3);
+               reg(3) <= reg(2);
+               reg(2) <= reg(1);
+               reg(1) <= reg(0);
+               reg(0) <= dec;             
             end if;
         end if;
     end process shiftreg;
