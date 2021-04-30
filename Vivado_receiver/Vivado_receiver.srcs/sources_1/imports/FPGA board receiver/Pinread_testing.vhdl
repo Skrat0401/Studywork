@@ -13,13 +13,13 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity Pinread_top is
   port (
-        Clk     : in std_logic;
-        Rst     : in std_logic;
-        output  : out std_logic;
-        input_pin : in std_logic;
-        LED_B   : out std_logic;
-        LED_A   : out std_logic;
-        LED_C   : out std_logic
+        Clk         : in std_logic;
+        Rst         : in std_logic;
+        output      : out std_logic;
+        input_pin   : in std_logic;
+        LED_B       : out std_logic;
+        LED_A       : out std_logic;
+        LED_C       : out std_logic
      );
 end Pinread_top;
 
