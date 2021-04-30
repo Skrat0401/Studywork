@@ -11,22 +11,22 @@ use IEEE.numeric_std.all;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity synchronisation is
-    Port ( clk              : in std_logic;
-           Rst              : in std_logic;
-           LED_B            : out std_logic;
-           syn_success      : out std_logic;
-           data_in_pin      : in std_logic;
-           data_out         : out STD_LOGIC_VECTOR (7 downto 0);
-           syn_en           : in STD_LOGIC);
-end synchronisation;
+entity synchronization is
+    Port ( clk              : in    std_logic;
+           Rst              : in    std_logic;
+           LED_B            : out   std_logic;
+           syn_success      : out   std_logic;
+           data_in_pin      : in    std_logic;
+           data_out         : out   unsigned (7 downto 0);
+           output_addr      : out   unsigned (7 downto 0);
+           syn_en           : in    std_logic);
+end synchronization;
 
-architecture Behavioral of synchronisation is
+architecture Behavioral of synchronization is
     signal reg              : std_logic_vector(7 downto 0);
     signal dec              : std_logic;
     signal clockcounter     : unsigned (19 downto 0):= (others=>'0');
     signal synclock         : std_logic := '0';
-    signal output_addr      : unsigned (7 downto 0);
     signal outputcounter    : integer;
     signal enable_data_out  : std_logic;
 begin
@@ -95,7 +95,7 @@ end process slowclock;
                 outputcounter <= outputcounter + 1;
             else
                 output_addr <= output_addr + 1;
-                data_out <= reg;
+                data_out <= unsigned(reg);
                 outputcounter <= 0;
             end if;      
         end if;
