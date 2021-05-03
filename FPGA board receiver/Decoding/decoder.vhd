@@ -1,26 +1,29 @@
 library ieee;
     use ieee.std_logic_1164.all;
     use IEEE.numeric_std.all;
+    use ieee.std_logic_unsigned.all;
     
     entity decoder is
       port (
-            Clk     	: in std_logic;
-            Rst     	: in std_logic; --aktive low
-            enable  	: in std_logic; --switch r2 
-            fullcounter : in std_logic; --signalisiert Speicher ist voll
-            ADDR		: in std_logic;
-            DATOUT_DECR : out std_logic_vector(7 downto 0);
-            DATOUT_ADDR : out std_logic_vector(7 downto 0)); -- entschlüsselte Daten
+            Clk     	: in    std_logic;
+            Rst     	: in    std_logic; --aktive low
+            enable  	: in    std_logic; --switch r2 
+            fullcounter : in    std_logic; --signalisiert Speicher ist voll
+            ADDR_Key	: in    std_logic_vector(7 downto 0);
+            DATOUT_DECR : out   unsigned(7 downto 0); 	-- Datenausgang entschlüsselte Daten
+            DATOUT_ADDR : out   unsigned(7 downto 0); 	-- Adresse für entschlüsselte Daten
+            DATIN_ENCR  : in    unsigned(7 downto 0);		-- Dateneingang verschlüsselte Daten
+            DATIN_ADDR  : out   unsigned (7 downto 0)); 	-- Sourceadresse verschlüsselte Daten
     end decoder;
     
     architecture RTL of decoder is
       
       component Random_Number_8
           port(  
-         	 	Clk 				: in std_logic;
-        		Rst 				: in std_logic;
-        		KeyIn 				: in unsigned (7 downto 0);
-        		reset_Number 		: in std_logic;
+         	 	Clk 				: in  std_logic;
+        		Rst 				: in  std_logic;
+        		KeyIn 				: in  unsigned (7 downto 0);
+        		reset_Number 		: in  std_logic;
         		RanNum 				: out unsigned (8 downto 1);
         		RanNum_targetadress : out unsigned (7 downto 0));
       end component Random_Number_8;
@@ -38,78 +41,87 @@ library ieee;
      	
      component Random_Number_8_mem                                 
         port ( Clk    				: in  std_logic;
-               RanNum_targetadress 	: in unsigned 	(7 downto 0);
+               RanNum_targetadress 	: in  unsigned 	(7 downto 0);
                RanNum_In 			: in  unsigned 	(7 downto 0);
-               RanNum_sourceadress 	: in unsigned 	(7 downto 0);
-               RanNum_Out 			: out  unsigned (7 downto 0)); 
+               RanNum_sourceadress 	: in  unsigned 	(7 downto 0);
+               RanNum_Out 			: out unsigned (7 downto 0)); 
     	end component Random_Number_8_mem;
     	 
       
-      signal Source_DE_ADDR : unsigned(7 downto 0) := "00000000";
-      signal Target_DE_ADDR : unsigned(7 downto 0) := "00000000";
-      signal RanNum         : unsigned(7 downto 0);
+      signal RanNumber_IN   : unsigned(7 downto 0);
+	  signal RanNumber_OUT  : unsigned(7 downto 0);
       signal KeyInInt       : unsigned(7 downto 0);
-      signal RanNum_ADDR    : unsigned(7 downto 0):= "00000000";
+      signal RanNum_tADDR   : unsigned(7 downto 0):= "00000000";
+      signal RanNum_sADDR   : unsigned(7 downto 0):= "00000000";
+      signal Source_ADDR    : unsigned(7 downto 0):= "00000000";
+      signal Target_ADDR    : unsigned(7 downto 0):= "00000000";
       signal reset_Number	: std_logic;  
       signal counter        : integer;
-      signal ADDRKey        : std_logic_vector(7 downto 0);
 
   begin 
    
       RanNumber_mem: Random_Number_8_mem 
       port map (
           Clk => Clk,
-          RanNum_targetadress =>
-          RanNum_In			  =>
-          RanNum_sourceadress =>
-          RanNum_Out 		  => 
-          Source_ADDR => Source_EN_ADDR, 
-          CDOUT => DReg);
-
+          RanNum_targetadress => RanNum_tADDR,
+          RanNum_In			  => RanNumber_IN,
+          RanNum_sourceadress => RanNum_sADDR,
+          RanNum_Out 		  => RanNumber_OUT);
+      
       RanNumber : Random_Number_8 
       port map(
           Clk => Clk,
           Rst => Rst,
           KeyIn => KeyInInt,
           reset_Number => reset_Number,
-          RanNum => RanNum,
-          RanNum_targetadress => RanNum_ADDR );
+          RanNum => RanNumber_IN,
+          RanNum_targetadress => RanNum_tADDR );
           
-      ROMKey_mem : Key  
+      ROMKey_mem : ROMKey  
       generic map(
           L_BITS => 8, 
           M_BITS => 8) 
       port map (
-           ADDR => ADDRKey,
+           ADDR => ADDR_Key,
            DATA => KeyInInt); 
-
-AddressKey : process (Clk, enable) begin
-  if(enable = '1') then
-    if rising_edge(Clk) then
-             ADDRKey <= ADDR ;
-    end if;
-  end if;
-end process AddressKey;
 
 
 decryption : process(Clk,Rst, enable) begin
+    
     if(Rst = '0') then
-        Source_DE_ADDR <= "00000000";
-        Target_DE_ADDR <= "00000000";
+        Source_ADDR <= "00000000";
+        Target_ADDR <= "00000000";
+        DATOUT_ADDR <= Target_ADDR;  
+        DATIN_ADDR <= Source_ADDR;
         reset_Number <='0';
         counter <= 0;
     end if;                
     
- 	elsif(enable = '1') then
+ 	if(enable = '1') then
  		if (fullcounter = '1')then
-   			if(counter < 63) then
+ 		if ( counter < 65) then 
+ 		if (rising_edge(Clk))then
+ 		DATOUT_DECR <= RanNumber_OUT xor DATIN_ENCR;
+ 		end if;
+ 		end if;
+   			if(counter < 64) then
            		if rising_edge(Clk) then
-             		DATOUT_DECR <= RanNum xor DATOUT;
-             		Target_DE_ADDR <= Target_DE_ADDR + 1;
-             		Source_DE_ADDR <= Source_DE_ADDR + 1;
-             		counter <= counter +1;
-            	 end if;
+             		--DATOUT_DECR <= RanNumber_OUT xor DATIN_ENCR;
+             		DATOUT_ADDR <= Target_ADDR;  
+                    DATIN_ADDR <= Source_ADDR;
+             		Source_ADDR <= Source_ADDR + 1;
+             		Target_ADDR <=  Target_ADDR + 1;
+             		if ( RanNum_sADDR < 63) then
+             		RanNum_sADDR <= RanNum_sADDR + 1;
+                    end if;
+                   end if;
        		end if;
+       		if(counter < 65) then
+           	    if rising_edge(Clk) then
+           	    DATOUT_ADDR <= Target_ADDR;
+           	    counter <= counter + 1;
+           	    end if;
+           	end if;
      	end if;   
      end if;
 end process decryption;

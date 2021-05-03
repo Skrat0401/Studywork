@@ -7,9 +7,9 @@
     entity Random_Number_8_mem is                                  
         port ( Clk    				: in  std_logic;
                RanNum_targetadress 	: in unsigned (7 downto 0);
-               RanNum_In 			: in  unsigned (7 downto 0);
+               RanNum_In 			: in unsigned (7 downto 0);
                RanNum_sourceadress 	: in unsigned 	(7 downto 0);
-               RanNum_Out 			: out  unsigned (7 downto 0)); 
+               RanNum_Out 			: out unsigned (7 downto 0)); 
     end Random_Number_8_mem;  
             
     architecture RTL of Random_Number_8_mem is
