@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="testbench_decoder_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="testbench_decoder" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="569166fs"></ZoomStartTime>
+      <ZoomEndTime time="1086167fs"></ZoomEndTime>
+      <Cursor1Time time="1000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="299"></NameColumnWidth>
+      <ValueColumnWidth column_width="132"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="25" />
+   <wvobject fp_name="/testbench_decoder/T_Clk" type="logic">
+      <obj_property name="ElementShortName">T_Clk</obj_property>
+      <obj_property name="ObjectShortName">T_Clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/T_Rst" type="logic">
+      <obj_property name="ElementShortName">T_Rst</obj_property>
+      <obj_property name="ObjectShortName">T_Rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/T_enable" type="logic">
+      <obj_property name="ElementShortName">T_enable</obj_property>
+      <obj_property name="ObjectShortName">T_enable</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/T_fullcounter" type="logic">
+      <obj_property name="ElementShortName">T_fullcounter</obj_property>
+      <obj_property name="ObjectShortName">T_fullcounter</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/memory_DECR" type="array">
+      <obj_property name="ElementShortName">memory_DECR[0:63][7:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_DECR[0:63][7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/T_ADDR" type="array">
+      <obj_property name="ElementShortName">T_ADDR[7:0]</obj_property>
+      <obj_property name="ObjectShortName">T_ADDR[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/T_DATOUT_DECR" type="array">
+      <obj_property name="ElementShortName">T_DATOUT_DECR[7:0]</obj_property>
+      <obj_property name="ObjectShortName">T_DATOUT_DECR[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/T_DATOUT_ADDR" type="array">
+      <obj_property name="ElementShortName">T_DATOUT_ADDR[7:0]</obj_property>
+      <obj_property name="ObjectShortName">T_DATOUT_ADDR[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/T_DATIN_ENCR" type="array">
+      <obj_property name="ElementShortName">T_DATIN_ENCR[7:0]</obj_property>
+      <obj_property name="ObjectShortName">T_DATIN_ENCR[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/T_DATIN_ADDR" type="array">
+      <obj_property name="ElementShortName">T_DATIN_ADDR[7:0]</obj_property>
+      <obj_property name="ObjectShortName">T_DATIN_ADDR[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/memory_source_ENCR" type="array">
+      <obj_property name="ElementShortName">memory_source_ENCR[0:63][7:0]</obj_property>
+      <obj_property name="ObjectShortName">memory_source_ENCR[0:63][7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/DUT/ADDR_Key" type="array">
+      <obj_property name="ElementShortName">ADDR_Key[7:0]</obj_property>
+      <obj_property name="ObjectShortName">ADDR_Key[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/DUT/DATOUT_DECR" type="array">
+      <obj_property name="ElementShortName">DATOUT_DECR[7:0]</obj_property>
+      <obj_property name="ObjectShortName">DATOUT_DECR[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/DUT/DATOUT_ADDR" type="array">
+      <obj_property name="ElementShortName">DATOUT_ADDR[7:0]</obj_property>
+      <obj_property name="ObjectShortName">DATOUT_ADDR[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/DUT/DATIN_ENCR" type="array">
+      <obj_property name="ElementShortName">DATIN_ENCR[7:0]</obj_property>
+      <obj_property name="ObjectShortName">DATIN_ENCR[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/DUT/DATIN_ADDR" type="array">
+      <obj_property name="ElementShortName">DATIN_ADDR[7:0]</obj_property>
+      <obj_property name="ObjectShortName">DATIN_ADDR[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/DUT/RanNumber_IN" type="array">
+      <obj_property name="ElementShortName">RanNumber_IN[7:0]</obj_property>
+      <obj_property name="ObjectShortName">RanNumber_IN[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/DUT/RanNumber_OUT" type="array">
+      <obj_property name="ElementShortName">RanNumber_OUT[7:0]</obj_property>
+      <obj_property name="ObjectShortName">RanNumber_OUT[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/DUT/KeyInInt" type="array">
+      <obj_property name="ElementShortName">KeyInInt[7:0]</obj_property>
+      <obj_property name="ObjectShortName">KeyInInt[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/DUT/RanNum_tADDR" type="array">
+      <obj_property name="ElementShortName">RanNum_tADDR[7:0]</obj_property>
+      <obj_property name="ObjectShortName">RanNum_tADDR[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/DUT/RanNum_sADDR" type="array">
+      <obj_property name="ElementShortName">RanNum_sADDR[7:0]</obj_property>
+      <obj_property name="ObjectShortName">RanNum_sADDR[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/DUT/Source_ADDR" type="array">
+      <obj_property name="ElementShortName">Source_ADDR[7:0]</obj_property>
+      <obj_property name="ObjectShortName">Source_ADDR[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/DUT/Target_ADDR" type="array">
+      <obj_property name="ElementShortName">Target_ADDR[7:0]</obj_property>
+      <obj_property name="ObjectShortName">Target_ADDR[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/DUT/reset_Number" type="logic">
+      <obj_property name="ElementShortName">reset_Number</obj_property>
+      <obj_property name="ObjectShortName">reset_Number</obj_property>
+   </wvobject>
+   <wvobject fp_name="/testbench_decoder/DUT/counter" type="other">
+      <obj_property name="ElementShortName">counter</obj_property>
+      <obj_property name="ObjectShortName">counter</obj_property>
+   </wvobject>
+</wave_config>

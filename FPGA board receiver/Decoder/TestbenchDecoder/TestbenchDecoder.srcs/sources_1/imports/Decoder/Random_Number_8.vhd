@@ -21,10 +21,10 @@ begin
     process (Clk, Rst) begin
         if(Rst = '0') then
             RanNumReg <= KeyIn;
-            Target_ADDR = "00000000";
+            Target_ADDR <= "00000000";
         elsif(reset_Number = '1')then
         	RanNumReg <= KeyIn;
-        	Target_ADDR = "00000000";
+        	Target_ADDR <= "00000000";
         elsif rising_edge(Clk) then 
             for ii in 8 downto 2 loop
                 RanNumReg(ii) <= RanNumReg(ii-1);
@@ -32,7 +32,10 @@ begin
             RanNumReg(1) <= RanNumReg(8) XOR RanNumReg(6) XOR RanNumReg(5) XOR RanNumReg(4);
             Target_ADDR <= Target_ADDR + 1;
         end if;
-    end process;
-    RanNum <= RanNumReg;
+    if(Target_ADDR < 64) then
     RanNum_targetadress <= Target_ADDR;
+    RanNum <= RanNumReg;
+    end if;
+    end process;
+   
 end architecture RTL;

@@ -21,10 +21,10 @@ begin
     process (Clk, Rst) begin
         if(Rst = '0') then
             RanNumReg <= KeyIn;
-            Target_ADDR = "00000000";
+            Target_ADDR <= "00000000";
         elsif(reset_Number = '1')then
         	RanNumReg <= KeyIn;
-        	Target_ADDR = "00000000";
+        	Target_ADDR <= "00000000";
         elsif rising_edge(Clk) then 
             for ii in 8 downto 2 loop
                 RanNumReg(ii) <= RanNumReg(ii-1);
