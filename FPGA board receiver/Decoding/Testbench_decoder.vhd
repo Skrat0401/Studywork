@@ -67,10 +67,10 @@ T_ADDR 			<= "00000011";
 process (T_Clk) begin
         if(rising_edge(T_Clk))then
           --intern_ADDR <= to_integer(T_DATOUT_ADDR);
-          if(T_DATOUT_ADDR > 1)then
+          if(T_DATOUT_ADDR > 0)then
           memory_DECR (to_integer(T_DATOUT_ADDR-1)) <= T_DATOUT_DECR;
-          elsif (T_DATOUT_ADDR = 0)then
-          memory_DECR (to_integer(T_DATOUT_ADDR)) <= T_DATOUT_DECR;
+          --elsif (T_DATOUT_ADDR = 0)then
+          --memory_DECR (to_integer(T_DATOUT_ADDR)) <= T_DATOUT_DECR;
         end if; 
         end if;
 end process;

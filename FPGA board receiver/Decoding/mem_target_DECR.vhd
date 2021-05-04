@@ -32,10 +32,10 @@ begin
             if (DATOUT_ADDR > "00111111") then
                 Target_Data_Decr <= memory_DECR(to_integer(Target_Addr_Decr));
             end if;
-            if (DATOUT_ADDR > 1) then
+            if (DATOUT_ADDR > 0) then
                 memory_DECR(to_integer(DATOUT_ADDR - 1)) <= DATOUT_DECR;
-            elsif (DATOUT_ADDR = 0) then
-                memory_DECR(to_integer(DATOUT_ADDR)) <= DATOUT_DECR;
+           -- elsif (DATOUT_ADDR = 0) then
+            --    memory_DECR(to_integer(DATOUT_ADDR)) <= DATOUT_DECR;
             end if;
         end if;
     end process;
