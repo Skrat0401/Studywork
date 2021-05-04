@@ -22,7 +22,7 @@ architecture RTL of mem_target_decr is
 
 begin
 
-    process(Clk)
+    process(Clk, Rst)
     begin
         if (Rst = '0') then
             memory_DECR      <= (others => "00000000");

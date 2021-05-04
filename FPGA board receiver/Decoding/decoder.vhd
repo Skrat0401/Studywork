@@ -9,6 +9,7 @@ entity decoder is
         Rst         : in  std_logic;    --aktive low
         enable      : in  std_logic;    --switch r2 
         fullcounter : in  std_logic;    --signalisiert Speicher ist voll
+        syn_success : in  std_logic;
         ADDR_Key    : in  std_logic_vector(7 downto 0);
         DATOUT_DECR : out unsigned(7 downto 0); -- Datenausgang entschlüsselte Daten
         DATOUT_ADDR : out unsigned(7 downto 0); -- Adresse für entschlüsselte Daten
@@ -96,28 +97,31 @@ begin
         end if;
 
         if (enable = '1') then
-            if (fullcounter = '1') then
-                if (counter < 65) then
-                    if (rising_edge(Clk)) then
-                        DATOUT_DECR <= RanNumber_OUT xor DATIN_ENCR;
-                    end if;
-                end if;
-                if (counter < 64) then
-                    if rising_edge(Clk) then
-                        --DATOUT_DECR <= RanNumber_OUT xor DATIN_ENCR;
-                        DATOUT_ADDR <= Target_ADDR;
-                        DATIN_ADDR  <= Source_ADDR;
-                        Source_ADDR <= Source_ADDR + 1;
-                        Target_ADDR <= Target_ADDR + 1;
-                        if (RanNum_sADDR < 63) then
-                            RanNum_sADDR <= RanNum_sADDR + 1;
+            if (syn_success = '1') then
+
+                if (fullcounter = '1') then
+                    if (counter < 65) then
+                        if (rising_edge(Clk)) then
+                            DATOUT_DECR <= RanNumber_OUT xor DATIN_ENCR;
                         end if;
                     end if;
-                end if;
-                if (counter < 65) then
-                    if rising_edge(Clk) then
-                        DATOUT_ADDR <= Target_ADDR;
-                        counter     <= counter + 1;
+                    if (counter < 64) then
+                        if rising_edge(Clk) then
+                            --DATOUT_DECR <= RanNumber_OUT xor DATIN_ENCR;
+                            DATOUT_ADDR <= Target_ADDR;
+                            DATIN_ADDR  <= Source_ADDR;
+                            Source_ADDR <= Source_ADDR + 1;
+                            Target_ADDR <= Target_ADDR + 1;
+                            if (RanNum_sADDR < 63) then
+                                RanNum_sADDR <= RanNum_sADDR + 1;
+                            end if;
+                        end if;
+                    end if;
+                    if (counter < 65) then
+                        if rising_edge(Clk) then
+                            DATOUT_ADDR <= Target_ADDR;
+                            counter     <= counter + 1;
+                        end if;
                     end if;
                 end if;
             end if;
