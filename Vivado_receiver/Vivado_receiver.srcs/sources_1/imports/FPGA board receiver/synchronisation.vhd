@@ -14,7 +14,7 @@ use IEEE.numeric_std.all;
 entity synchronisation is
     Port ( clk              : in std_logic;
            Rst              : in std_logic;
-           LED_B            : out std_logic;
+           LED_syn_clock    : out std_logic;
            syn_success      : out std_logic;
            data_in_pin      : in std_logic;
            data_out         : out STD_LOGIC_VECTOR (7 downto 0);
@@ -68,7 +68,7 @@ slowclock : process (Clk) begin
         else
             clockcounter <= "00000000000000000000";
             synclock <= not synclock;
-            LED_B <= '1'; --Test für programming device
+            LED_syn_clock <= '1'; --Test für programming device
         end if;
     end if;
 end process slowclock; 

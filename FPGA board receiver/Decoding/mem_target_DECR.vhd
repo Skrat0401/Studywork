@@ -34,8 +34,8 @@ begin
             end if;
             if (DATOUT_ADDR > 0) then
                 memory_DECR(to_integer(DATOUT_ADDR - 1)) <= DATOUT_DECR;
-           -- elsif (DATOUT_ADDR = 0) then
-            --    memory_DECR(to_integer(DATOUT_ADDR)) <= DATOUT_DECR;
+                -- elsif (DATOUT_ADDR = 0) then
+                --    memory_DECR(to_integer(DATOUT_ADDR)) <= DATOUT_DECR;
             end if;
         end if;
     end process;
