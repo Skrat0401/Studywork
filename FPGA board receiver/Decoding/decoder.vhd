@@ -90,8 +90,9 @@ begin
         if (Rst = '0') then
             Source_ADDR  <= "00000000";
             Target_ADDR  <= "00000000";
-            DATOUT_ADDR  <= Target_ADDR;
-            DATIN_ADDR   <= Source_ADDR;
+            DATOUT_ADDR  <= "00000000";
+            DATIN_ADDR   <= "00000000";
+            RanNum_sADDR <= "00000000";
             reset_Number <= '0';
             counter      <= 0;
         end if;

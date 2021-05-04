@@ -30,7 +30,9 @@ begin
                 RanNumReg(ii) <= RanNumReg(ii-1);
             end loop;
             RanNumReg(1) <= RanNumReg(8) XOR RanNumReg(6) XOR RanNumReg(5) XOR RanNumReg(4);
-            Target_ADDR <= Target_ADDR + 1;
+            if(Target_ADDR < 64)then
+                Target_ADDR <= Target_ADDR + 1;
+            end if;
         end if;
     if(Target_ADDR < 64) then
     RanNum_targetadress <= Target_ADDR;

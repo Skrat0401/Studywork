@@ -18,6 +18,7 @@ architecture RTL of testbench_decoder is
     signal T_DATOUT_ADDR	: unsigned(7 downto 0);
     signal T_DATIN_ENCR		: unsigned(7 downto 0);
     signal T_DATIN_ADDR		: unsigned(7 downto 0);
+    signal T_syn_success    : std_logic;
     signal memory_source_ENCR : ROM_array := (
     0 => (to_unsigned(character'pos('A'), 8)),1 => (to_unsigned(character'pos('B'), 8)),
     2 => (to_unsigned(character'pos('C'), 8)), 3 => (to_unsigned(character'pos('D'), 8)),
@@ -39,13 +40,16 @@ component decoder
             DATOUT_DECR : out unsigned(7 downto 0); 	-- Datenausgang entschlüsselte Daten
             DATOUT_ADDR : out unsigned(7 downto 0); 	-- Adresse für entschlüsselte Daten
             DATIN_ENCR  : in  unsigned(7 downto 0);		-- Dateneingang verschlüsselte Daten
+            syn_success  : in std_logic;
             DATIN_ADDR  : out unsigned (7 downto 0)
+            
         	);
     end component decoder;
 
 begin
     
   DUT: decoder port map (
+        syn_success => T_syn_success,
         Clk 		=> T_Clk,
         Rst 		=> T_Rst,
         enable 		=> T_enable,
@@ -58,14 +62,17 @@ begin
 );
 
 T_fullcounter 	<= '1';
+T_syn_success   <= '1';
 T_ADDR 			<= "00000011";
 
     process (T_Clk) begin
     T_DATIN_ENCR <= memory_source_ENCR(to_integer(T_DATIN_ADDR));
     end process;
 
-process (T_Clk) begin
-        if(rising_edge(T_Clk))then
+process (T_Clk, T_Rst) begin
+        if(T_Rst = '0') then
+            memory_DECR <= (others => "00000000");
+        elsif(rising_edge(T_Clk))then
           --intern_ADDR <= to_integer(T_DATOUT_ADDR);
           if(T_DATOUT_ADDR > 0)then
           memory_DECR (to_integer(T_DATOUT_ADDR-1)) <= T_DATOUT_DECR;
@@ -85,6 +92,8 @@ enable : process
 reset : process 
   begin
      wait for 5 ns; T_Rst <= '0';
+     wait for 4 ns; T_Rst <= '1';
+     wait for 2 ms; T_Rst <= '0';
      wait for 4 ns; T_Rst <= '1';
      wait;
   end process reset;
