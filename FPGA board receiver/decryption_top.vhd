@@ -181,5 +181,18 @@ begin
             end if;
         end if;
     end process syn_LED;
+    
+    comparator_LED : process(Clk)
+    begin
+        if (rising_edge(Clk)) then
+            if (success_flag_LED = '1') then
+                LED_comparator_success <= '1';
+                LED_comparator_fail <= '0';
+            else
+                LED_comparator_fail <= '1';
+                LED_comparator_success <= '0';
+            end if;
+        end if;
+    end process comparator_LED;
 
 end RTL;

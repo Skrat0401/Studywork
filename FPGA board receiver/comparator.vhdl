@@ -21,7 +21,7 @@ architecture Behavioral of comparator is
     signal int_Current_ADDR : unsigned(7 downto 0):= "00000000";
  
 begin
-Vergleicher: process(Clk,Rst) begin
+compare: process(Clk,Rst) begin
 
     if(Rst = '0') then
         ADDR_DECR         <= "00000000";
@@ -49,6 +49,6 @@ Vergleicher: process(Clk,Rst) begin
            		end if;
     end if;
     end if;
-end process Vergleicher;
+end process compare;
          
 end Behavioral;
