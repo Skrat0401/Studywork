@@ -12,7 +12,7 @@ use IEEE.numeric_std.all;
 --use UNISIM.VComponents.all;
 
 entity synchronization is
-    Port(clk         : in  std_logic;
+    Port(Clk         : in  std_logic;
          Rst         : in  std_logic;
          LED_B       : out std_logic;
          syn_success : out std_logic;
@@ -45,7 +45,7 @@ begin
         end if;
     end process decision;
 
-    shiftreg : process(synclock)
+    shiftreg : process(synclock, Rst)
     begin
         if (Rst = '0') then
             reg <= "00000000";
@@ -63,7 +63,7 @@ begin
         end if;
     end process shiftreg;
 
-    slowclock : process(Clk)
+    slowclock : process(Clk,Rst)
     begin
         if (Rst = '0') then
             clockcounter <= "00000000000000000000";
@@ -78,7 +78,7 @@ begin
         end if;
     end process slowclock;
 
-    decisionstart : process(clk)
+    decisionstart : process(Clk, Rst)
     begin
         if (Rst = '0') then
             syn_success     <= '0';

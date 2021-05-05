@@ -36,7 +36,7 @@ architecture Behavioral of Testbench_synchronisation is
            LED_B            : out std_logic;
            syn_success      : out std_logic;
            data_in_pin      : in std_logic;
-           data_out         : out std_logic_vector (7 downto 0);
+           data_out         : out unsigned (7 downto 0);
            syn_en           : in STD_LOGIC);
     end component synchronisation;
 begin
