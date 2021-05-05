@@ -29,6 +29,7 @@ architecture Behavioral of synchronization is
     signal synclock        : std_logic             := '0';
     signal outputcounter   : integer;
     signal enable_data_out : std_logic;
+    signal out_addr_buffer : unsigned(7 downto 0);
 begin
 
     decision : process(synclock, Rst)
@@ -100,7 +101,8 @@ begin
             if (outputcounter < 7) then
                 outputcounter <= outputcounter + 1;
             else
-                output_addr   <= output_addr + 1;
+                out_addr_buffer <= out_addr_buffer + 1;
+                output_addr   <= out_addr_buffer;
                 data_out      <= unsigned(reg);
                 outputcounter <= 0;
             end if;
