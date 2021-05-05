@@ -2,16 +2,16 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use IEEE.numeric_std.all;
-entity ROMKey is
+entity ROMKey_mem is
 generic (
     L_BITS : natural; -- Addressbreite
     M_BITS : natural); -- Wortbreite
 port ( 
     ADDR : in std_logic_vector(L_BITS-1 downto 0);
     DATA : out unsigned(M_BITS-1 downto 0));
-end ROMKey;
+end ROMKey_mem;
 
-architecture RTL of ROMKey is
+architecture RTL of ROMKey_mem is
 
 type ROM_array is array(0 to 2**L_BITS - 1) of unsigned(M_BITS - 1 downto 0);
 

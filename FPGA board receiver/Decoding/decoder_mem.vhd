@@ -4,16 +4,16 @@ library ieee;
 use ieee.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity mem_target_decr is
+entity decoder_mem is
     port(Clk              : in  std_logic;
          Rst              : in  std_logic;
          DATOUT_DECR      : in  unsigned(7 downto 0);
          DATOUT_ADDR      : in  unsigned(7 downto 0);
          Target_Data_Decr : out unsigned(7 downto 0);
          Target_Addr_Decr : in  unsigned(7 downto 0));
-end mem_target_decr;
+end decoder_mem;
 
-architecture RTL of mem_target_decr is
+architecture RTL of decoder_mem is
 
     -- Array 32 Durchgänge, 8 Bit Breite
     type RAM_array is array (0 to 63) of unsigned(7 downto 0);

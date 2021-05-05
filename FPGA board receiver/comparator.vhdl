@@ -4,7 +4,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 use ieee.std_logic_unsigned.all;
 
-entity Vergleicher is
+entity comparator is
     Port ( ADDR_DECR          : out unsigned(7 downto 0);
            DATA_DECR          : in unsigned(7 downto 0);
            Clk                : in STD_LOGIC;
@@ -13,9 +13,9 @@ entity Vergleicher is
            ADDR_current_mem   : out unsigned(7 downto 0);
            DATA_current_mem   : in unsigned(7 downto 0);
            success_flag       : out STD_LOGIC);
-end Vergleicher;
+end comparator;
  
-architecture Behavioral of Vergleicher is
+architecture Behavioral of comparator is
     signal counter          : integer;
     signal int_DECR_ADDR    : unsigned(7 downto 0):= "00000000";
     signal int_Current_ADDR : unsigned(7 downto 0):= "00000000";

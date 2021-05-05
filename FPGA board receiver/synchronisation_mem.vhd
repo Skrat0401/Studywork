@@ -4,16 +4,16 @@ library ieee;
 use ieee.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity memory_syn is
+entity synchronization_mem is
     port(Clk         : in  std_logic;
          target_addr : in  unsigned(7 downto 0);
          data_in     : in  unsigned(7 downto 0);
          output_addr : in  unsigned(7 downto 0);
          fullcounter : out std_logic;
          data_out    : out unsigned(7 downto 0));
-end memory_syn;
+end synchronization_mem;
 
-architecture RTL of memory_syn is
+architecture RTL of synchronization_mem is
 
     type RAM_array is array (0 to 63) of unsigned(7 downto 0);
 

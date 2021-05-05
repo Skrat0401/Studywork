@@ -29,7 +29,7 @@ architecture RTL of decoder is
             RanNum_targetadress : out unsigned(7 downto 0));
     end component Random_Number_8;
 
-    component ROMKey
+    component ROMKey_mem
         generic(
             L_BITS : natural;
             M_BITS : natural
@@ -38,7 +38,7 @@ architecture RTL of decoder is
             ADDR : in  std_logic_vector(L_BITS - 1 downto 0);
             DATA : out unsigned(M_BITS - 1 downto 0)
         );
-    end component ROMKey;
+    end component ROMKey_mem;
 
     component Random_Number_8_mem
         port(Clk                 : in  std_logic;
@@ -59,6 +59,7 @@ architecture RTL of decoder is
     signal counter       : integer;
 
 begin
+    
 
     RanNumber_mem : Random_Number_8_mem
         port map(
@@ -77,7 +78,7 @@ begin
             RanNum              => RanNumber_IN,
             RanNum_targetadress => RanNum_tADDR);
 
-    ROMKey_mem : ROMKey
+    ROMKey_memory : ROMKey_mem
         generic map(
             L_BITS => 8,
             M_BITS => 8)
