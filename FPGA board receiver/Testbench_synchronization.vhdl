@@ -20,7 +20,7 @@ architecture Behavioral of Testbench_synchronisation is
     signal T_Rst                : std_logic;
     signal T_data_in_pin        : std_logic;
     signal T_syn_en             : std_logic;
-    signal T_data_out           : std_logic_vector (7 downto 0);
+    signal T_data_out           : unsigned (7 downto 0);
     signal T_syn_success        : std_logic;
     signal T_LED_B              : std_logic;
     signal T_data               : std_logic_vector (30 downto 0);
