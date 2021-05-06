@@ -38,9 +38,9 @@ begin
             dec <= '0';
         elsif (rising_edge(synclock)) then
             if (data_in_pin = '0') then
-                dec <= '1';
-            else
                 dec <= '0';
+            else
+                dec <= '1';
             end if;
         end if;
     end process decision;
@@ -97,6 +97,7 @@ begin
             output_addr   <= "00000000";
             outputcounter <= 0;
             data_out      <= "00000000";
+            out_addr_buffer <= "00000000";
         elsif (rising_edge(synclock) and enable_data_out = '1') then
             if (outputcounter < 7) then
                 outputcounter <= outputcounter + 1;
