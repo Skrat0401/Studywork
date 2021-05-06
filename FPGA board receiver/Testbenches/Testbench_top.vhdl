@@ -87,9 +87,9 @@ begin
 
     enable : process
     begin
-        wait for 5 ns;
-        T_enable <= '0';
-        wait for 100 ms;
+       -- wait for 5 ns;
+       -- T_enable <= '0';
+       --  wait for 100 ms;
         T_enable <= '1';
         wait;
     end process enable;
