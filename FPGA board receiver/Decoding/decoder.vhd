@@ -96,6 +96,7 @@ begin
             RanNum_sADDR <= "00000000";
             reset_Number <= '0';
             counter      <= 0;
+            DATOUT_DECR  <= "00000000";
         end if;
 
         if (enable = '1') then
