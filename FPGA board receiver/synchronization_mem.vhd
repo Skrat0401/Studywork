@@ -6,6 +6,7 @@ use IEEE.numeric_std.all;
 
 entity synchronization_mem is
     port(Clk         : in  std_logic;
+         Rst         : in  std_logic;
          target_addr : in  unsigned(7 downto 0);
          data_in     : in  unsigned(7 downto 0);
          output_addr : in  unsigned(7 downto 0);
@@ -22,11 +23,13 @@ architecture RTL of synchronization_mem is
 begin
     process(Clk)
     begin
-        if (rising_edge(Clk)) then
+        if (Rst = '0') then
+            fullcounter <= '0';
+        elsif (rising_edge(Clk)) then
             memory_target_ENCR(to_integer(target_addr)) <= data_in;
             data_out                                    <= memory_target_ENCR(to_integer(output_addr));
         end if;
-        if (target_addr > "00111111") then
+        if (target_addr > "00111110") then -- max hex 3f
             fullcounter <= '1';
         end if;
     end process;

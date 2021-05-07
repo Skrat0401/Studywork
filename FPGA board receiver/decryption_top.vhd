@@ -51,7 +51,8 @@ architecture RTL of decryption_top is
             DATOUT_DECR      : in  unsigned(7 downto 0);
             DATOUT_ADDR      : in  unsigned(7 downto 0);
             Target_Data_Decr : out unsigned(7 downto 0);
-            Target_Addr_Decr : in  unsigned(7 downto 0)
+            Target_Addr_Decr : in  unsigned(7 downto 0);
+            fullcounter_DECR : out std_logic
         );
     end component decoder_mem;
 
@@ -73,6 +74,7 @@ architecture RTL of decryption_top is
     component synchronization_mem
         port(
             Clk         : in  std_logic;
+            Rst         : in  std_logic;
             target_addr : in  unsigned(7 downto 0);
             data_in     : in  unsigned(7 downto 0);
             output_addr : in  unsigned(7 downto 0);
@@ -83,7 +85,7 @@ architecture RTL of decryption_top is
 
     component synchronization
         port(
-            clk         : in  std_logic;
+            Clk         : in  std_logic;
             Rst         : in  std_logic;
             LED_B       : out std_logic;
             syn_success : out std_logic;
@@ -129,6 +131,7 @@ begin
 
     memory_for_decryption : decoder_mem
         port map(
+            fullcounter_DECR => fullcounter_DECR_mem,
             Clk              => Clk,
             Rst              => Rst,
             DATOUT_DECR      => DATOUT_DECR,
@@ -153,12 +156,13 @@ begin
 
     memory_synchronization : synchronization_mem
         port map(
-            Clk         => Clk,
+            Clk => Clk,
+            Rst => Rst,
             target_addr => memory_syn_target_addr,
-            data_in     => data,
+            data_in => data,
             output_addr => addr_for_decode,
             fullcounter => fullcounter,
-            data_out    => data_for_decode
+            data_out => data_for_decode
         );
 
     synchronization_input : synchronization
