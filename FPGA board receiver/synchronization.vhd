@@ -63,7 +63,7 @@ begin
         end if;
     end process shiftreg;
 
-    slowclock : process(Clk,Rst)
+    slowclock : process(Clk, Rst)
     begin
         if (Rst = '0') then
             clockcounter <= "00000000000000000000";
@@ -94,18 +94,19 @@ begin
     Output_to_main : process(Rst, synclock)
     begin
         if (Rst = '0') then
-            output_addr   <= "00000000";
-            outputcounter <= 0;
-            data_out      <= "00000000";
+            output_addr     <= "00000000";
+            outputcounter   <= 0;
+            data_out        <= "00000000";
             out_addr_buffer <= "00000000";
         elsif (rising_edge(synclock) and enable_data_out = '1') then
             if (outputcounter < 7) then
                 outputcounter <= outputcounter + 1;
             else
-                out_addr_buffer <= out_addr_buffer + 1;
-                output_addr   <= out_addr_buffer;
-                data_out      <= unsigned(reg);
-                outputcounter <= 0;
+                if (out_addr_buffer < "01000000") then
+                    out_addr_buffer <= out_addr_buffer + 1;
+                    output_addr     <= out_addr_buffer;
+                    data_out        <= unsigned(reg);
+                end if;
             end if;
         end if;
 

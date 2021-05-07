@@ -173,23 +173,28 @@ begin
             syn_en      => enable
         );
 
-    syn_LED : process(Clk)
+    syn_LED : process(Clk, Rst)
     begin
-        if (rising_edge(Clk)) then
+        if (Rst = '0') then
+            LED_syn_success <= '0';
+        elsif (rising_edge(Clk)) then
             if (syn_success = '1') then
                 LED_syn_success <= '1';
             end if;
         end if;
     end process syn_LED;
-    
-    comparator_LED : process(Clk)
+
+    comparator_LED : process(Clk, Rst)
     begin
-        if (rising_edge(Clk)) then
+        if (Rst = '0') then
+            LED_comparator_success <= '0';
+            LED_comparator_fail    <= '0';
+        elsif (rising_edge(Clk)) then
             if (success_flag_LED = '1') then
                 LED_comparator_success <= '1';
-                LED_comparator_fail <= '0';
+                LED_comparator_fail    <= '0';
             else
-                LED_comparator_fail <= '1';
+                LED_comparator_fail    <= '1';
                 LED_comparator_success <= '0';
             end if;
         end if;
