@@ -10,7 +10,9 @@ entity decoder_mem is
          DATOUT_DECR      : in  unsigned(7 downto 0);
          DATOUT_ADDR      : in  unsigned(7 downto 0);
          Target_Data_Decr : out unsigned(7 downto 0);
-         Target_Addr_Decr : in  unsigned(7 downto 0));
+         Target_Addr_Decr : in  unsigned(7 downto 0);
+         fullcounter_DECR : out std_logic
+        );
 end decoder_mem;
 
 architecture RTL of decoder_mem is
@@ -27,11 +29,12 @@ begin
         if (Rst = '0') then
             memory_DECR      <= (others => "00000000");
             Target_Data_Decr <= "00000000";
-        end if;
-        if (rising_edge(Clk)) then
+            fullcounter_DECR <= '0';
+        elsif (rising_edge(Clk)) then
             if (DATOUT_ADDR > "00111111") then
-                Target_Data_Decr <= memory_DECR(to_integer(Target_Addr_Decr));
+                fullcounter_DECR <= '1';
             end if;
+            Target_Data_Decr <= memory_DECR(to_integer(Target_Addr_Decr));
             if (DATOUT_ADDR > 0) then
                 memory_DECR(to_integer(DATOUT_ADDR - 1)) <= DATOUT_DECR;
                 -- elsif (DATOUT_ADDR = 0) then
