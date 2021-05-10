@@ -35,6 +35,7 @@ begin
             DATOUT_ADDR  <= "00000000";
             DATIN_ADDR   <= "00000000";
             RanNum_sADDR <= "00000000";
+            RanNum_sADDR_int <= "00000000";
             counter      <= 0;
             DATOUT_DECR  <= "00000000";
         end if;
@@ -61,7 +62,7 @@ begin
                             end if;
                         end if;
                     end if;
-                    if (counter < 65) then
+                    if (counter < 66) then
                         if rising_edge(Clk) then
                             DATOUT_ADDR <= Target_ADDR;
                             counter     <= counter + 1;

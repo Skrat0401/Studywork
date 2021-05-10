@@ -35,8 +35,8 @@ begin
                 fullcounter_DECR <= '1';
             end if;
             Target_Data_Decr <= memory_DECR(to_integer(Target_Addr_Decr));
-            if (DATOUT_ADDR > 0) then
-                memory_DECR(to_integer(DATOUT_ADDR - 1)) <= DATOUT_DECR;
+            if (DATOUT_ADDR > 1) then
+                memory_DECR(to_integer(DATOUT_ADDR - 2)) <= DATOUT_DECR;
                 -- elsif (DATOUT_ADDR = 0) then
                 --    memory_DECR(to_integer(DATOUT_ADDR)) <= DATOUT_DECR;
             end if;
