@@ -23,6 +23,35 @@ architecture RTL of decryption_top is
     signal syn_success : std_logic;
     signal data        : unsigned(7 downto 0);
 
+    component Random_Number_8
+        port(
+            Clk                 : in  std_logic;
+            Rst                 : in  std_logic;
+            KeyIn               : in  unsigned(7 downto 0);
+            reset_Number        : in  std_logic;
+            RanNum              : out unsigned(8 downto 1);
+            RanNum_targetadress : out unsigned(7 downto 0));
+    end component Random_Number_8;
+
+    component ROMKey_mem
+        generic(
+            L_BITS : natural;
+            M_BITS : natural
+        );
+        port(
+            ADDR : in  std_logic_vector(L_BITS - 1 downto 0);
+            DATA : out unsigned(M_BITS - 1 downto 0)
+        );
+    end component ROMKey_mem;
+
+    component Random_Number_8_mem
+        port(Clk                 : in  std_logic;
+             RanNum_targetadress : in  unsigned(7 downto 0);
+             RanNum_In           : in  unsigned(7 downto 0);
+             RanNum_sourceadress : in  unsigned(7 downto 0);
+             RanNum_Out          : out unsigned(7 downto 0));
+    end component Random_Number_8_mem;
+
     component comparator
         port(
             ADDR_DECR        : out unsigned(7 downto 0);
@@ -58,16 +87,17 @@ architecture RTL of decryption_top is
 
     component decoder
         port(
-            Clk         : in  std_logic;
-            Rst         : in  std_logic;
-            enable      : in  std_logic;
-            fullcounter : in  std_logic;
-            syn_success : in  std_logic;
-            ADDR_Key    : in  std_logic_vector(7 downto 0);
-            DATOUT_DECR : out unsigned(7 downto 0);
-            DATOUT_ADDR : out unsigned(7 downto 0);
-            DATIN_ENCR  : in  unsigned(7 downto 0);
-            DATIN_ADDR  : out unsigned(7 downto 0)
+            Clk          : in  std_logic;
+            Rst          : in  std_logic;
+            enable       : in  std_logic;
+            fullcounter  : in  std_logic;
+            syn_success  : in  std_logic;
+            RanNumber    : in  unsigned(7 downto 0);
+            RanNum_sADDR : out unsigned(7 downto 0);
+            DATOUT_DECR  : out unsigned(7 downto 0);
+            DATOUT_ADDR  : out unsigned(7 downto 0);
+            DATIN_ENCR   : in  unsigned(7 downto 0);
+            DATIN_ADDR   : out unsigned(7 downto 0)
         );
     end component decoder;
 
@@ -107,8 +137,39 @@ architecture RTL of decryption_top is
     signal DATA_DECR_mem          : unsigned(7 downto 0);
     signal ADDR_current_mem       : unsigned(7 downto 0);
     signal DATA_current_mem       : unsigned(7 downto 0);
+    signal KeyInInt               : unsigned(7 downto 0);
+    signal RanNumber_IN           : unsigned(7 downto 0);
+    signal RanNumber_OUT          : unsigned(7 downto 0);
+    signal RanNum_tADDR           : unsigned(7 downto 0) := "00000000";
+    signal RanNum_sADDR           : unsigned(7 downto 0) := "00000000";
+    signal reset_Number           : std_logic := '0'; --high equal true
 
 begin
+    reset_Number <= '0';
+    RanNumber_mem : Random_Number_8_mem
+        port map(
+            Clk                 => Clk,
+            RanNum_targetadress => RanNum_tADDR,
+            RanNum_In           => RanNumber_IN,
+            RanNum_sourceadress => RanNum_sADDR,
+            RanNum_Out          => RanNumber_OUT);
+
+    RanNumber : Random_Number_8
+        port map(
+            Clk                 => Clk,
+            Rst                 => Rst,
+            KeyIn               => KeyInInt,
+            reset_Number        => reset_Number,
+            RanNum              => RanNumber_IN,
+            RanNum_targetadress => RanNum_tADDR);
+
+    ROMKey_memory : ROMKey_mem
+        generic map(
+            L_BITS => 8,
+            M_BITS => 8)
+        port map(
+            ADDR => sw,
+            DATA => KeyInInt);
 
     comparator_for_success : component comparator
         port map(
@@ -131,38 +192,39 @@ begin
 
     memory_for_decryption : decoder_mem
         port map(
-            fullcounter_DECR => fullcounter_DECR_mem,
             Clk              => Clk,
             Rst              => Rst,
             DATOUT_DECR      => DATOUT_DECR,
             DATOUT_ADDR      => DATOUT_ADDR,
             Target_Data_Decr => DATA_DECR_mem,
-            Target_Addr_Decr => ADDR_DECR_mem
+            Target_Addr_Decr => ADDR_DECR_mem,
+            fullcounter_DECR => fullcounter_DECR_mem
         );
 
     decode_unit : component decoder
         port map(
-            Clk         => Clk,
-            Rst         => Rst,
-            enable      => enable,
+            Clk => Clk,
+            Rst => Rst,
+            enable => enable,
             fullcounter => fullcounter,
             syn_success => syn_success,
-            ADDR_Key    => sw,
+            RanNumber => RanNumber_OUT,
+            RanNum_sADDR => RanNum_sADDR,
             DATOUT_DECR => DATOUT_DECR,
             DATOUT_ADDR => DATOUT_ADDR,
-            DATIN_ENCR  => data_for_decode,
-            DATIN_ADDR  => addr_for_decode
+            DATIN_ENCR => data_for_decode,
+            DATIN_ADDR => addr_for_decode
         );
 
     memory_synchronization : synchronization_mem
         port map(
-            Clk => Clk,
-            Rst => Rst,
+            Clk         => Clk,
+            Rst         => Rst,
             target_addr => memory_syn_target_addr,
-            data_in => data,
+            data_in     => data,
             output_addr => addr_for_decode,
             fullcounter => fullcounter,
-            data_out => data_for_decode
+            data_out    => data_for_decode
         );
 
     synchronization_input : synchronization
