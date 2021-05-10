@@ -106,6 +106,7 @@ begin
                     out_addr_buffer <= out_addr_buffer + 1;
                     output_addr     <= out_addr_buffer;
                     data_out        <= unsigned(reg);
+                    outputcounter <= 0;
                 end if;
             end if;
         end if;
