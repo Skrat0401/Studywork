@@ -5,33 +5,27 @@ use ieee.std_logic_unsigned.all;
 
 entity decoder is
     port(
-        Clk         : in  std_logic;
-        Rst         : in  std_logic;    --aktive low
-        enable      : in  std_logic;    --switch r2 
-        fullcounter : in  std_logic;    --signalisiert Speicher ist voll
-        syn_success : in  std_logic;
-        RanNumber   : in unsigned(7 downto 0);
-        RanNum_sADDR: out unsigned(7 downto 0);
-        DATOUT_DECR : out unsigned(7 downto 0); -- Datenausgang entschlüsselte Daten
-        DATOUT_ADDR : out unsigned(7 downto 0); -- Adresse für entschlüsselte Daten
-        DATIN_ENCR  : in  unsigned(7 downto 0); -- Dateneingang verschlüsselte Daten
-        DATIN_ADDR  : out unsigned(7 downto 0)); -- Sourceadresse verschlüsselte Daten
+        Clk          : in  std_logic;
+        Rst          : in  std_logic;   --aktive low
+        enable       : in  std_logic;   --switch r2 
+        fullcounter  : in  std_logic;   --signalisiert Speicher ist voll
+        syn_success  : in  std_logic;
+        RanNumber    : in  unsigned(7 downto 0);
+        RanNum_sADDR : out unsigned(7 downto 0);
+        DATOUT_DECR  : out unsigned(7 downto 0); -- Datenausgang entschlüsselte Daten
+        DATOUT_ADDR  : out unsigned(7 downto 0); -- Adresse für entschlüsselte Daten
+        DATIN_ENCR   : in  unsigned(7 downto 0); -- Dateneingang verschlüsselte Daten
+        DATIN_ADDR   : out unsigned(7 downto 0)); -- Sourceadresse verschlüsselte Daten
 end decoder;
 
 architecture RTL of decoder is
 
-
-
-
-
-
-    signal Source_ADDR   : unsigned(7 downto 0) := "00000000";
-    signal Target_ADDR   : unsigned(7 downto 0) := "00000000";
-
-    signal counter       : integer;
+    signal Source_ADDR      : unsigned(7 downto 0) := "00000000";
+    signal Target_ADDR      : unsigned(7 downto 0) := "00000000";
+    signal RanNum_sADDR_int : unsigned(7 downto 0);
+    signal counter          : integer;
 
 begin
-    
 
     decryption : process(Clk, Rst, enable)
     begin
@@ -61,8 +55,9 @@ begin
                             DATIN_ADDR  <= Source_ADDR;
                             Source_ADDR <= Source_ADDR + 1;
                             Target_ADDR <= Target_ADDR + 1;
-                            if (RanNum_sADDR < 63) then
-                                RanNum_sADDR <= RanNum_sADDR + 1;
+                            if (RanNum_sADDR_int < 63) then
+                                RanNum_sADDR_int <= RanNum_sADDR_int + 1;
+                                RanNum_sADDR     <= RanNum_sADDR_int;
                             end if;
                         end if;
                     end if;
