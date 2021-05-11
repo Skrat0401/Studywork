@@ -44,7 +44,7 @@ begin
             if (syn_success = '1') then
 
                 if (fullcounter = '1') then
-                    if (counter < 65) then
+                    if (counter < 66) then
                         if (rising_edge(Clk)) then
                             DATOUT_DECR <= RanNumber xor DATIN_ENCR;
                         end if;
@@ -52,11 +52,10 @@ begin
                     if (counter < 64) then
                         if rising_edge(Clk) then
                             --DATOUT_DECR <= RanNumber_OUT xor DATIN_ENCR;
-                            DATOUT_ADDR <= Target_ADDR;
+                           -- DATOUT_ADDR <= Target_ADDR;
                             DATIN_ADDR  <= Source_ADDR;
                             Source_ADDR <= Source_ADDR + 1;
-                            Target_ADDR <= Target_ADDR + 1;
-                            if (RanNum_sADDR_int < 63) then
+                            if (RanNum_sADDR_int < 64) then
                                 RanNum_sADDR_int <= RanNum_sADDR_int + 1;
                                 RanNum_sADDR     <= RanNum_sADDR_int;
                             end if;
@@ -65,6 +64,7 @@ begin
                     if (counter < 66) then
                         if rising_edge(Clk) then
                             DATOUT_ADDR <= Target_ADDR;
+                            Target_ADDR <= Target_ADDR + 1;
                             counter     <= counter + 1;
                         end if;
                     end if;
