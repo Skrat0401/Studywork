@@ -51,7 +51,7 @@ begin
             reg <= "00000000";
         elsif (rising_edge(synclock)) then
             if (syn_en = '1') then
-                reg(0) <= dec;
+                reg(0) <= data_in_pin;
                 reg(1) <= reg(0);
                 reg(2) <= reg(1);
                 reg(3) <= reg(2);
@@ -78,12 +78,12 @@ begin
         end if;
     end process slowclock;
 
-    decisionstart : process(Clk, Rst)
+    decisionstart : process(Clk, Rst, synclock)
     begin
         if (Rst = '0') then
             syn_success     <= '0';
             enable_data_out <= '0';
-        elsif (rising_edge(Clk)) then
+        elsif (rising_edge(synclock)) then
             if (reg = "11111111") then  -- code for start
                 syn_success     <= '1';
                 enable_data_out <= '1';
