@@ -22,7 +22,9 @@
      begin       
       process (Clk) begin    
         if(rising_edge(Clk))then
-          memory_target_ENCR(to_integer(Target_EN_ADDR)) <= data_in;
+        if(Target_EN_ADDR > 0) then
+          memory_target_ENCR(to_integer(Target_EN_ADDR - 1)) <= data_in;
+          end if;
           data_out <=  memory_target_ENCR(to_integer(output_addr));
         end if;
       end process;

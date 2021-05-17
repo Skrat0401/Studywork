@@ -33,9 +33,14 @@ begin
         output => T_output        
 );
 
-T_enable <= '1';
-T_sw <= "00000011";
- 
+
+T_sw <= "00000000";
+ en : process 
+  begin
+     wait for 5 ns; T_enable <= '0';
+     wait for 4 ns; T_enable <= '1';
+     wait;
+  end process en;
 reset : process 
   begin
      wait for 5 ns; T_Rst <= '0';
