@@ -122,7 +122,9 @@ AddressKey : process (Clk, enable) begin
 end process AddressKey;
 
 
-Output_serial : process (Rst, Outputclock, enable) begin
+Output_serial : process (Rst, Outputclock, enable) 
+constant bytelen : integer := 7;
+begin
     test <= test +1;
  if(Rst = '0') then
      output_addr <= "00000000";
@@ -131,14 +133,16 @@ Output_serial : process (Rst, Outputclock, enable) begin
      test <= 0;
    --elsif(enable = '1') then
    elsif (rising_edge(outputclock)) then
+        output <= data_out(bytelen - outputcounter); 
         if (outputcounter < 7) then
           --  output <= '1';
-            output <= data_out(outputcounter); 
+             
             outputcounter <= outputcounter + 1;
         else
             output_addr <= output_addr + 1;
             outputcounter <= 0;
-        end if;      
+        end if; 
+    
     end if;
       
 end process Output_serial;
