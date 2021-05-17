@@ -85,7 +85,8 @@ architecture RTL of electricity_cipher is
     signal Output_ADDR_rannum : unsigned(7 downto 0);
     signal RanNumOut          : unsigned(7 downto 0);
     signal fullcounter        : std_logic;
-
+    signal start              : std_logic;
+    signal sequenzcounter     : integer; 
 begin
     rannum_mem : component memory_randnum
         port map(
@@ -130,6 +131,8 @@ begin
             ADDR => ADDRKey,
             DATA => KeyInInt);
 
+
+  
     slowclock : process(Clk)
     begin                               -- Prozess für die Outputclock
         if (rising_edge(Clk)) then
@@ -152,27 +155,44 @@ begin
         end if;
 
     end process AddressKey;
+          
 
     Output_serial : process(Rst, Outputclock, enable)
         constant bytelen : integer := 7;
+        constant sequenz : std_logic_vector(7 downto 0) := "11111111";
     begin
-        test <= test + 1;
+       -- test <= test + 1;
         if (Rst = '0') then
             output_addr   <= "00000000";
             outputcounter <= 0;
+            sequenzcounter <= 0;
             output        <= '0';
+            start         <= '0';
             test          <= 0;
         --elsif(enable = '1') then
         elsif (rising_edge(outputclock)) then
+        
+        if(start = '1') then
             output <= data_out(bytelen - outputcounter);
             if (outputcounter < 7) then
                 --  output <= '1';
-
                 outputcounter <= outputcounter + 1;
             else
                 output_addr   <= output_addr + 1;
                 outputcounter <= 0;
             end if;
+            
+          elsif(start = '0') then
+            output <= sequenz(bytelen - sequenzcounter);
+            if (sequenzcounter < 7) then
+                --  output <= '1';
+
+                sequenzcounter <= sequenzcounter + 1;
+            else
+                sequenzcounter <= 0;
+                start <= '1';
+            end if;
+          end if;
 
         end if;
 
