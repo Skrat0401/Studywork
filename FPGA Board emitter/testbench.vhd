@@ -45,6 +45,8 @@ reset : process
   begin
      wait for 5 ns; T_Rst <= '0';
      wait for 4 ns; T_Rst <= '1';
+     wait for 5000000 ns; T_Rst <= '0';
+     wait for 4 ns; T_Rst <= '1';
      wait;
   end process reset;
 
