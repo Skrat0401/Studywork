@@ -26,7 +26,9 @@
      others => (to_unsigned(character'pos(' '), 8)));  
     
      begin       
-      process (Clk) begin         
+      process (Clk) begin
+        if(rising_edge(Clk)) then         
            CDOUT <= memory_source_ENCR(to_integer(Source_ADDR));
+        end if;
       end process;
     end RTL;

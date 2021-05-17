@@ -189,12 +189,14 @@ begin
         elsif (enable = '1') then
             if (fullcounter = '1') then
                 if rising_edge(Clk) then
+                    if(counter < 65) then
+                        data_in <= RanNumOut xor DReg;
+                    end if;
                     if (counter < 63) then
-                        data_in            <= RanNumOut xor DReg;
                         Source_EN_ADDR     <= Source_EN_ADDR + 1;
                         Output_ADDR_rannum <= Output_ADDR_rannum + 1;  
                     end if;
-                  if (counter < 64) then
+                  if (counter < 65) then
                       Target_ADDR  <= Target_ADDR + 1;
                       counter      <= counter + 1;             
                   end if; 
