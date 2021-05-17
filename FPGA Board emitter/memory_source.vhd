@@ -15,7 +15,7 @@
              
      -- Beispieltext
      signal memory_source_ENCR : ROM_array   := (
-     0 => (to_unsigned(character'pos('A'), 8)),1 => (to_unsigned(character'pos('B'), 8)),
+     0 => ("11111111"), 1 => (to_unsigned(character'pos('B'), 8)),
      2 => (to_unsigned(character'pos('C'), 8)), 3 => (to_unsigned(character'pos('D'), 8)),
      4 => (to_unsigned(character'pos('E'), 8)), 5 => (to_unsigned(character'pos('F'), 8)),
      6 => (to_unsigned(character'pos('G'), 8)),7 => (to_unsigned(character'pos('H'), 8)),
