@@ -66,27 +66,29 @@ architecture RTL of electricity_cipher is
         );
     end component Key;
 
-    signal Source_EN_ADDR     : unsigned(7 downto 0);
-    signal DReg               : unsigned(7 downto 0);
-    signal RanNum             : unsigned(7 downto 0);
-    signal KeyInInt           : unsigned(7 downto 0);
-    signal reset_Number       : std_logic;
-    signal counter            : integer;
-    signal ADDRKey            : std_logic_vector(7 downto 0);
-    signal clockcounter       : unsigned(19 downto 0) := (others => '0');
-    signal outputclock        : std_logic             := '0';
-    signal Target_ADDR        : unsigned(7 downto 0);
-    signal data_in            : unsigned(7 downto 0);
-    signal output_addr        : unsigned(7 downto 0);
-    signal data_out           : unsigned(7 downto 0);
-    signal outputcounter      : integer;
-    signal test               : integer;
-    signal Target_ADDR_rannum : unsigned(7 downto 0);
-    signal Output_ADDR_rannum : unsigned(7 downto 0);
-    signal RanNumOut          : unsigned(7 downto 0);
-    signal fullcounter        : std_logic;
-    signal start              : std_logic;
-    signal sequenzcounter     : integer; 
+    signal Source_EN_ADDR      : unsigned(7 downto 0);
+    signal DReg                : unsigned(7 downto 0);
+    signal RanNum              : unsigned(7 downto 0);
+    signal KeyInInt            : unsigned(7 downto 0);
+    signal reset_Number        : std_logic;
+    signal counter             : integer;
+    signal ADDRKey             : std_logic_vector(7 downto 0);
+    signal clockcounter        : unsigned(19 downto 0) := (others => '0');
+    signal outputclock         : std_logic             := '0';
+    signal Target_ADDR         : unsigned(7 downto 0);
+    signal data_in             : unsigned(7 downto 0);
+    signal output_addr         : unsigned(7 downto 0);
+    signal data_out            : unsigned(7 downto 0);
+    signal outputcounter       : integer;
+    signal test                : integer;
+    signal Target_ADDR_rannum  : unsigned(7 downto 0);
+    signal Output_ADDR_rannum  : unsigned(7 downto 0);
+    signal RanNumOut           : unsigned(7 downto 0);
+    signal fullcounter         : std_logic;
+    signal start               : std_logic;
+    signal sequenzcounter      : integer;
+    signal onetime_counter     : integer;
+    signal output_addr_counter : integer;
 begin
     rannum_mem : component memory_randnum
         port map(
@@ -131,8 +133,6 @@ begin
             ADDR => ADDRKey,
             DATA => KeyInInt);
 
-
-  
     slowclock : process(Clk)
     begin                               -- Prozess für die Outputclock
         if (rising_edge(Clk)) then
@@ -155,44 +155,50 @@ begin
         end if;
 
     end process AddressKey;
-          
 
     Output_serial : process(Rst, Outputclock, enable)
-        constant bytelen : integer := 7;
+        constant bytelen : integer                      := 7;
         constant sequenz : std_logic_vector(7 downto 0) := "11111111";
     begin
-       -- test <= test + 1;
+        -- test <= test + 1;
         if (Rst = '0') then
-            output_addr   <= "00000000";
-            outputcounter <= 0;
-            sequenzcounter <= 0;
-            output        <= '0';
-            start         <= '0';
-            test          <= 0;
+            output_addr         <= "00000000";
+            outputcounter       <= 0;
+            sequenzcounter      <= 0;
+            output              <= '0';
+            start               <= '0';
+            test                <= 0;
+            onetime_counter     <= 0;
+            output_addr_counter <= 0;
         --elsif(enable = '1') then
         elsif (rising_edge(outputclock)) then
-        
-        if(start = '1') then
-            output <= data_out(bytelen - outputcounter);
-            if (outputcounter < 7) then
-                --  output <= '1';
-                outputcounter <= outputcounter + 1;
-            else
-                output_addr   <= output_addr + 1;
-                outputcounter <= 0;
-            end if;
-            
-          elsif(start = '0') then
-            output <= sequenz(bytelen - sequenzcounter);
-            if (sequenzcounter < 7) then
-                --  output <= '1';
 
-                sequenzcounter <= sequenzcounter + 1;
-            else
-                sequenzcounter <= 0;
-                start <= '1';
+            if (start = '1') then
+                if (onetime_counter < 64) then
+                    output <= data_out(bytelen - outputcounter);
+                    if (outputcounter < 7) then
+                        --  output <= '1';
+                        outputcounter <= outputcounter + 1;
+                    else
+                        if (output_addr_counter < 63) then
+                            output_addr_counter <= output_addr_counter + 1;
+                            output_addr   <= output_addr + 1;
+                            outputcounter <= 0;
+                        end if;
+                        onetime_counter <= onetime_counter + 1;
+                    end if;
+                end if;
+            elsif (start = '0') then
+                output <= sequenz(bytelen - sequenzcounter);
+                if (sequenzcounter < 7) then
+                    --  output <= '1';
+
+                    sequenzcounter <= sequenzcounter + 1;
+                else
+                    sequenzcounter <= 0;
+                    start          <= '1';
+                end if;
             end if;
-          end if;
 
         end if;
 
@@ -209,18 +215,18 @@ begin
         elsif (enable = '1') then
             if (fullcounter = '1') then
                 if rising_edge(Clk) then
-                    if(counter < 65) then
+                    if (counter < 65) then
                         data_in <= RanNumOut xor DReg;
                     end if;
                     if (counter < 63) then
                         Source_EN_ADDR     <= Source_EN_ADDR + 1;
-                        Output_ADDR_rannum <= Output_ADDR_rannum + 1;  
+                        Output_ADDR_rannum <= Output_ADDR_rannum + 1;
                     end if;
-                  if (counter < 65) then
-                      Target_ADDR  <= Target_ADDR + 1;
-                      counter      <= counter + 1;             
-                  end if; 
-                end if;              
+                    if (counter < 65) then
+                        Target_ADDR <= Target_ADDR + 1;
+                        counter     <= counter + 1;
+                    end if;
+                end if;
             end if;
         end if;
     end process encryption;
