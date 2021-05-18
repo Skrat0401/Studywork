@@ -293,7 +293,7 @@ set_property PACKAGE_PIN A16 [get_ports data_in_pin]
 #set_property PACKAGE_PIN K19 [get_ports QspiCSn]
 	#set_property IOSTANDARD LVCMOS33 [get_ports QspiCSn]
 
-
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets Rst_IBUF]
 ## Configuration options, can be used for all designs
 set_property CONFIG_VOLTAGE 3.3 [current_design]
 set_property CFGBVS VCCO [current_design]
