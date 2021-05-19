@@ -1,0 +1,15 @@
+#-----------------------------------------------------------
+# Vivado v2019.2 (64-bit)
+# SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
+# IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
+# Start of session at: Tue May 18 20:01:28 2021
+# Process ID: 4624
+# Current directory: C:/Users/Administrator/Documents/LABORRechner/Studywork/Gesamtvalidierung_emitter
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent2312 C:\Users\Administrator\Documents\LABORRechner\Studywork\Gesamtvalidierung_emitter\Gesamtvalidierung_emitter.xpr
+# Log file: C:/Users/Administrator/Documents/LABORRechner/Studywork/Gesamtvalidierung_emitter/vivado.log
+# Journal file: C:/Users/Administrator/Documents/LABORRechner/Studywork/Gesamtvalidierung_emitter\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project C:/Users/Administrator/Documents/LABORRechner/Studywork/Gesamtvalidierung_emitter/Gesamtvalidierung_emitter.xpr
+update_compile_order -fileset sources_1
+1
