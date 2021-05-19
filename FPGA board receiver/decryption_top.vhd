@@ -15,8 +15,9 @@ entity decryption_top is
         LED_comparator_10_success : out std_logic;
         LED_comparator_30_success : out std_logic;
         LED_comparator_50_success : out std_logic;
-        LED_synfull               : out std_logic
-        -- output   : out std_logic
+        LED_synfull               : out std_logic;
+        LED_decrfull              : out std_logic;
+        output                    : out std_logic
     );
 
 end decryption_top;
@@ -300,11 +301,24 @@ begin
     fullcounter_syn_mem_LED : process(Clk, Rst)
     begin
         if (Rst = '0') then
-            LED_synfull <= '0';
+            LED_synfull  <= '0';
+            LED_decrfull <= '0';
         elsif (rising_edge(Clk)) then
             if (fullcounter = '1') then
                 LED_synfull <= '1';
             end if;
+            if (fullcounter_DECR_mem = '1') then
+                LED_decrfull <= '1';
+            end if;
         end if;
     end process fullcounter_syn_mem_LED;
+
+    Testing : process(Clk, Rst, DATOUT_ADDR)
+    begin
+        if (Rst = '0') then
+            output <= '0';
+        elsif(DATOUT_ADDR > "00000000")then
+            output <= '1';
+        end if;
+    end process Testing;
 end RTL;
