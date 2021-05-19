@@ -4,14 +4,18 @@ use IEEE.numeric_std.all;
 
 entity decryption_top is
     port(
-        Clk                    : in  std_logic; --100MHz
-        Rst                    : in  std_logic; --aktive low
-        enable                 : in  std_logic; --switch r2
-        data_in_pin            : in  std_logic;
-        sw                     : in  std_logic_vector(8 downto 1);
-        LED_syn_success        : out std_logic;
-        LED_comparator_success : out std_logic;
-        LED_comparator_fail    : out std_logic
+        Clk                       : in  std_logic; --100MHz
+        Rst                       : in  std_logic; --aktive low
+        enable                    : in  std_logic; --switch r2
+        data_in_pin               : in  std_logic;
+        sw                        : in  std_logic_vector(8 downto 1);
+        LED_syn_success           : out std_logic;
+        LED_comparator_success    : out std_logic;
+        LED_comparator_fail       : out std_logic;
+        LED_comparator_10_success : out std_logic;
+        LED_comparator_30_success : out std_logic;
+        LED_comparator_50_success : out std_logic;
+        LED_synfull               : out std_logic
         -- output   : out std_logic
     );
 
@@ -61,6 +65,9 @@ architecture RTL of decryption_top is
             fullcounter_DECR : in  std_logic;
             ADDR_current_mem : out unsigned(7 downto 0);
             DATA_current_mem : in  unsigned(7 downto 0);
+            success_flag10   : out STD_LOGIC;
+            success_flag30   : out STD_LOGIC;
+            success_flag50   : out STD_LOGIC;
             success_flag     : out STD_LOGIC
         );
     end component comparator;
@@ -142,7 +149,10 @@ architecture RTL of decryption_top is
     signal RanNumber_OUT          : unsigned(7 downto 0);
     signal RanNum_tADDR           : unsigned(7 downto 0) := "00000000";
     signal RanNum_sADDR           : unsigned(7 downto 0) := "00000000";
-    signal reset_Number           : std_logic := '0'; --high equal true
+    signal reset_Number           : std_logic            := '0'; --high equal true
+    signal success_flag10         : STD_LOGIC;
+    signal success_flag30         : STD_LOGIC;
+    signal success_flag50         : STD_LOGIC;
 
 begin
     reset_Number <= '0';
@@ -180,6 +190,9 @@ begin
             fullcounter_DECR => fullcounter_DECR_mem,
             ADDR_current_mem => ADDR_current_mem,
             DATA_current_mem => DATA_current_mem,
+            success_flag10   => success_flag10,
+            success_flag30   => success_flag30,
+            success_flag50   => success_flag50,
             success_flag     => success_flag_LED
         );
 
@@ -203,17 +216,17 @@ begin
 
     decode_unit : component decoder
         port map(
-            Clk => Clk,
-            Rst => Rst,
-            enable => enable,
-            fullcounter => fullcounter,
-            syn_success => syn_success,
-            RanNumber => RanNumber_OUT,
+            Clk          => Clk,
+            Rst          => Rst,
+            enable       => enable,
+            fullcounter  => fullcounter,
+            syn_success  => syn_success,
+            RanNumber    => RanNumber_OUT,
             RanNum_sADDR => RanNum_sADDR,
-            DATOUT_DECR => DATOUT_DECR,
-            DATOUT_ADDR => DATOUT_ADDR,
-            DATIN_ENCR => data_for_decode,
-            DATIN_ADDR => addr_for_decode
+            DATOUT_DECR  => DATOUT_DECR,
+            DATOUT_ADDR  => DATOUT_ADDR,
+            DATIN_ENCR   => data_for_decode,
+            DATIN_ADDR   => addr_for_decode
         );
 
     memory_synchronization : synchronization_mem
@@ -253,8 +266,11 @@ begin
     comparator_LED : process(Clk, Rst)
     begin
         if (Rst = '0') then
-            LED_comparator_success <= '0';
-            LED_comparator_fail    <= '0';
+            LED_comparator_success    <= '0';
+            LED_comparator_fail       <= '0';
+            LED_comparator_10_success <= '0';
+            LED_comparator_30_success <= '0';
+            LED_comparator_50_success <= '0';
         elsif (rising_edge(Clk)) then
             if (success_flag_LED = '1') then
                 LED_comparator_success <= '1';
@@ -263,7 +279,32 @@ begin
                 LED_comparator_fail    <= '1';
                 LED_comparator_success <= '0';
             end if;
+            if (success_flag10 = '1') then
+                LED_comparator_10_success <= '1';
+            else
+                LED_comparator_10_success <= '0';
+            end if;
+            if (success_flag30 = '1') then
+                LED_comparator_30_success <= '1';
+            else
+                LED_comparator_30_success <= '0';
+            end if;
+            if (success_flag50 = '1') then
+                LED_comparator_50_success <= '1';
+            else
+                LED_comparator_50_success <= '0';
+            end if;
         end if;
     end process comparator_LED;
 
+    fullcounter_syn_mem_LED : process(Clk, Rst)
+    begin
+        if (Rst = '0') then
+            LED_synfull <= '0';
+        elsif (rising_edge(Clk)) then
+            if (fullcounter = '1') then
+                LED_synfull <= '1';
+            end if;
+        end if;
+    end process fullcounter_syn_mem_LED;
 end RTL;
