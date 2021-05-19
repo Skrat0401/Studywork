@@ -38,9 +38,8 @@ begin
             RanNum_sADDR_int <= "00000000";
             counter      <= 0;
             DATOUT_DECR  <= "00000000";
-        end if;
-
-        if (enable = '1') then
+      
+        elsif (enable = '1') then
             if (syn_success = '1') then
 
                 if (fullcounter = '1') then

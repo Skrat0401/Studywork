@@ -36,8 +36,8 @@ begin
             success_flag10   <= '0';
             success_flag30   <= '0';
             success_flag50   <= '0';
-        end if;
-        if (fullcounter_DECR = '1') then
+       
+        elsif (fullcounter_DECR = '1') then
             if (counter < 64) then
                 if rising_edge(Clk) then
                     ADDR_DECR        <= int_DECR_ADDR;
