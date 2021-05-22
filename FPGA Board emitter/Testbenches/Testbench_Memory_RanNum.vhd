@@ -68,6 +68,18 @@ begin
         end if;
     end process output;
 
+    reset2 : process
+    begin
+        if (T_Rst = '0') then
+            T_Target_ADDR_rannum <= "00000000";
+            T_randnum_in         <= "00000000";
+            T_Output_ADDR_rannum <= "00000000";
+            T_rannum_out         <= "00000000";
+            T_fullcounter        <= '0';
+            intern_ADDR          <= "00000000";
+        end if;
+    end process reset2;
+
     reset : process
     begin
         wait for 5 ns;
