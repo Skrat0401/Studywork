@@ -10,11 +10,11 @@ architecture RTL of Testbench_Memory_RanNum is
     type ROM_array is array (0 to 63) of unsigned(7 downto 0);
     signal T_Clk                : std_logic;
     signal T_Rst                : std_logic;
-    signal T_Target_ADDR_rannum : unsigned(7 downto 0);
-    signal T_randnum_in         : unsigned(7 downto 0);
-    signal T_Output_ADDR_rannum : unsigned(7 downto 0);
-    signal T_rannum_out         : unsigned(7 downto 0);
-    signal T_fullcounter        : std_logic;
+    signal T_Target_ADDR_rannum : unsigned(7 downto 0):= "00000000";
+    signal T_randnum_in         : unsigned(7 downto 0):= "00000000";
+    signal T_Output_ADDR_rannum : unsigned(7 downto 0):= "00000000";
+    signal T_rannum_out         : unsigned(7 downto 0):= "00000000";
+    signal T_fullcounter        : std_logic := '0';
     signal intern_ADDR          : unsigned(7 downto 0) := "00000000";
 
     signal memory_source_ENCR : ROM_array := (
@@ -67,18 +67,6 @@ begin
             end if;
         end if;
     end process output;
-
-    reset2 : process
-    begin
-        if (T_Rst = '0') then
-            T_Target_ADDR_rannum <= "00000000";
-            T_randnum_in         <= "00000000";
-            T_Output_ADDR_rannum <= "00000000";
-            T_rannum_out         <= "00000000";
-            T_fullcounter        <= '0';
-            intern_ADDR          <= "00000000";
-        end if;
-    end process reset2;
 
     reset : process
     begin
