@@ -38,9 +38,11 @@ begin
             dec <= '0';
         elsif (rising_edge(synclock)) then
             if (data_in_pin = '0') then
-                dec <= '0';
+                dec <= '0';     -- comment out for inversion
+                --dec <= '1';   -- uncomment for inversion   
             else
-                dec <= '1';
+                dec <= '1';     -- comment out for inversion
+                --dec <= '0';   -- uncomment for inversion 
             end if;
         end if;
     end process decision;
@@ -51,7 +53,8 @@ begin
             reg <= "00000000";
         elsif (rising_edge(synclock)) then
             if (syn_en = '1') then
-                reg(0) <= data_in_pin;
+                reg(0) <= data_in_pin;      -- comment out for inversion 
+                --reg(0) <= dec;            -- uncomment for inversion 
                 reg(1) <= reg(0);
                 reg(2) <= reg(1);
                 reg(3) <= reg(2);

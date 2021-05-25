@@ -160,7 +160,7 @@ begin
         constant bytelen : integer                      := 7;
         constant sequenz : std_logic_vector(7 downto 0) := "11111111";
     begin
-        -- test <= test + 1;
+        -- test <= test + 1; --testing
         if (Rst = '0') then
             output_addr         <= "00000000";
             outputcounter       <= 0;
@@ -170,14 +170,14 @@ begin
             test                <= 0;
             onetime_counter     <= 0;
             output_addr_counter <= 0;
-        --elsif(enable = '1') then
+        --elsif(enable = '1') then      --testing
         elsif (rising_edge(outputclock)) then
 
             if (start = '1') then
                 if (onetime_counter < 64) then
                     output <= data_out(bytelen - outputcounter);
                     if (outputcounter < 7) then
-                        --  output <= '1';
+                        --  output <= '1'; --testing
                         outputcounter <= outputcounter + 1;
                     else
                         if (output_addr_counter < 63) then
@@ -191,15 +191,13 @@ begin
             elsif (start = '0') then
                 output <= sequenz(bytelen - sequenzcounter);
                 if (sequenzcounter < 7) then
-                    --  output <= '1';
-
+                    --  output <= '1'; --testing
                     sequenzcounter <= sequenzcounter + 1;
                 else
                     sequenzcounter <= 0;
                     start          <= '1';
                 end if;
             end if;
-
         end if;
 
     end process Output_serial;
