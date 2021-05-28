@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1621263612">
+  <File Type="BITSTR-BMM" Name="electricity_cipher_bd.bmm"/>
+  <File Type="ROUTE-PWR" Name="electricity_cipher_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="electricity_cipher.tcl"/>
+  <File Type="OPT-DCP" Name="electricity_cipher_opt.dcp"/>
+  <File Type="ROUTE-PWR-SUM" Name="electricity_cipher_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="electricity_cipher_reports.tcl"/>
+  <File Type="OPT-DRC" Name="electricity_cipher_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="electricity_cipher.hwdef"/>
+  <File Type="PWROPT-DCP" Name="electricity_cipher_pwropt.dcp"/>
+  <File Type="PLACE-DCP" Name="electricity_cipher_placed.dcp"/>
+  <File Type="PLACE-IO" Name="electricity_cipher_io_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="electricity_cipher_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="electricity_cipher_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="electricity_cipher_control_sets_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="electricity_cipher_incremental_reuse_pre_placed.rpt"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="electricity_cipher_postplace_pwropt.dcp"/>
+  <File Type="BG-BIN" Name="electricity_cipher.bin"/>
+  <File Type="PHYSOPT-DCP" Name="electricity_cipher_physopt.dcp"/>
+  <File Type="BITSTR-MSK" Name="electricity_cipher.msk"/>
+  <File Type="ROUTE-ERROR-DCP" Name="electricity_cipher_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="electricity_cipher_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="electricity_cipher_routed_bb.dcp"/>
+  <File Type="ROUTE-DRC" Name="electricity_cipher_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="electricity_cipher_drc_routed.pb"/>
+  <File Type="BITSTR-LTX" Name="electricity_cipher.ltx"/>
+  <File Type="ROUTE-DRC-RPX" Name="electricity_cipher_drc_routed.rpx"/>
+  <File Type="BITSTR-MMI" Name="electricity_cipher.mmi"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="electricity_cipher_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="electricity_cipher_methodology_drc_routed.rpx"/>
+  <File Type="BITSTR-SYSDEF" Name="electricity_cipher.sysdef"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="electricity_cipher_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="electricity_cipher_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="electricity_cipher_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="electricity_cipher_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="electricity_cipher_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="electricity_cipher_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="electricity_cipher_timing_summary_routed.rpx"/>
+  <File Type="RDI-RDI" Name="electricity_cipher.vdi"/>
+  <File Type="ROUTE-CLK" Name="electricity_cipher_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="electricity_cipher_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="electricity_cipher_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="electricity_cipher_bus_skew_routed.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="electricity_cipher_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="electricity_cipher_postroute_physopt_bb.dcp"/>
+  <File Type="BG-BIT" Name="electricity_cipher.bit"/>
+  <File Type="BITSTR-RBT" Name="electricity_cipher.rbt"/>
+  <File Type="BITSTR-NKY" Name="electricity_cipher.nky"/>
+  <File Type="PDI-FILE" Name="electricity_cipher.pdi"/>
+  <File Type="RCFI_FILE" Name="electricity_cipher.rcfi"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="CFI_FILE" Name="electricity_cipher.cfi"/>
+  <File Type="RNPI_FILE" Name="electricity_cipher.rnpi"/>
+  <File Type="NPI_FILE" Name="electricity_cipher.npi"/>
+  <File Type="RBD_FILE" Name="electricity_cipher.rbd"/>
+  <File Type="BG-BGN" Name="electricity_cipher.bgn"/>
+  <File Type="BG-DRC" Name="electricity_cipher.drc"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/imports/FPGA Board emitter/Key.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Documents/GitHub/Studywork/FPGA Board emitter/Key.vhd"/>
+        <Attr Name="ImportTime" Val="1609246101"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/FPGA Board emitter/Random_Number_8.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Documents/GitHub/Studywork/FPGA Board emitter/Random_Number_8.vhd"/>
+        <Attr Name="ImportTime" Val="1621254514"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/FPGA Board emitter/memory_randnum.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Documents/GitHub/Studywork/FPGA Board emitter/memory_randnum.vhd"/>
+        <Attr Name="ImportTime" Val="1621254534"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/FPGA Board emitter/memory_source.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Documents/GitHub/Studywork/FPGA Board emitter/memory_source.vhd"/>
+        <Attr Name="ImportTime" Val="1621246010"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/FPGA Board emitter/memory_target.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Documents/GitHub/Studywork/FPGA Board emitter/memory_target.vhd"/>
+        <Attr Name="ImportTime" Val="1609247956"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/FPGA Board emitter/encryption.vhd">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Documents/GitHub/Studywork/FPGA Board emitter/encryption.vhd"/>
+        <Attr Name="ImportTime" Val="1621254845"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="electricity_cipher"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PSRCDIR/constrs_1/imports/FPGA Board emitter/Basys-3-Master.xdc">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../../../../../Documents/GitHub/Studywork/FPGA Board emitter/Basys-3-Master.xdc"/>
+        <Attr Name="ImportTime" Val="1611235823"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1">
+    <Filter Type="Utils"/>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2019"/>
+    <Step Id="init_design"/>
+    <Step Id="opt_design"/>
+    <Step Id="power_opt_design"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design"/>
+    <Step Id="phys_opt_design" EnableStepBool="1"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design"/>
+    <Step Id="write_bitstream"/>
+    <Step Id="write_device_image"/>
+  </Strategy>
+</GenRun>

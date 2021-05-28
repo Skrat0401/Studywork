@@ -1,0 +1,7 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  \
+"../../../../Val_Emitter.srcs/sources_1/imports/FPGA Board emitter/memory_target.vhd" \
+"../../../../Val_Emitter.srcs/sim_1/imports/Testbenches/Testbench_Memory_Target.vhd" \
+
+# Do not sort compile order
+nosort

@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2019.2 (64-bit)
+# SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
+# IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
+# Start of session at: Mon May 17 12:14:45 2021
+# Process ID: 14528
+# Current directory: C:/Users/robin/AppData/Roaming/Xilinx/Vivado/Val_Emitter/Val_Emitter.runs/impl_1
+# Command line: vivado.exe -log electricity_cipher.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source electricity_cipher.tcl -notrace
+# Log file: C:/Users/robin/AppData/Roaming/Xilinx/Vivado/Val_Emitter/Val_Emitter.runs/impl_1/electricity_cipher.vdi
+# Journal file: C:/Users/robin/AppData/Roaming/Xilinx/Vivado/Val_Emitter/Val_Emitter.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source electricity_cipher.tcl -notrace

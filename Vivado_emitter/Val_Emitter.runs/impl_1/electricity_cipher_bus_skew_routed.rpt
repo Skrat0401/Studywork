@@ -1,0 +1,15 @@
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
+| Date         : Mon May 17 17:01:04 2021
+| Host         : Robins-Pc running 64-bit major release  (build 9200)
+| Command      : report_bus_skew -warn_on_violation -file electricity_cipher_bus_skew_routed.rpt -pb electricity_cipher_bus_skew_routed.pb -rpx electricity_cipher_bus_skew_routed.rpx
+| Design       : electricity_cipher
+| Device       : 7a35t-cpg236
+| Speed File   : -1  PRODUCTION 1.23 2018-06-13
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Bus Skew Report
+
+No bus skew constraints
+

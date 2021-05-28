@@ -1,0 +1,117 @@
+Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2019.2 (win64) Build 2708876 Wed Nov  6 21:40:23 MST 2019
+| Date         : Mon May 17 17:00:43 2021
+| Host         : Robins-Pc running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file electricity_cipher_control_sets_placed.rpt
+| Design       : electricity_cipher
+| Device       : xc7a35t
+-----------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    39 |
+|    Minimum number of control sets                        |    39 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |   195 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    39 |
+| >= 0 to < 4        |    26 |
+| >= 4 to < 6        |     0 |
+| >= 6 to < 8        |     3 |
+| >= 8 to < 10       |     2 |
+| >= 10 to < 12      |     0 |
+| >= 12 to < 14      |     1 |
+| >= 14 to < 16      |     1 |
+| >= 16              |     6 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              30 |           14 |
+| No           | No                    | Yes                    |              18 |           18 |
+| No           | Yes                   | No                     |              26 |           14 |
+| Yes          | No                    | No                     |              24 |            8 |
+| Yes          | No                    | Yes                    |             123 |           31 |
+| Yes          | Yes                   | No                     |               0 |            0 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++-----------------------------------------+------------------------------------------------------+----------------------------------------+------------------+----------------+
+|               Clock Signal              |                     Enable Signal                    |            Set/Reset Signal            | Slice Load Count | Bel Load Count |
++-----------------------------------------+------------------------------------------------------+----------------------------------------+------------------+----------------+
+|  RanNumber/RanNumReg_reg[3]_LDC_i_1_n_0 |                                                      | RanNumber/RanNumReg_reg[3]_LDC_i_2_n_0 |                1 |              1 |
+|  RanNumber/RanNumReg_reg[4]_LDC_i_1_n_0 |                                                      | RanNumber/RanNumReg_reg[4]_LDC_i_2_n_0 |                1 |              1 |
+|  RanNumber/RanNumReg_reg[6]_LDC_i_1_n_0 |                                                      | RanNumber/RanNumReg_reg[6]_LDC_i_2_n_0 |                1 |              1 |
+|  RanNumber/RanNumReg_reg[5]_LDC_i_1_n_0 |                                                      | RanNumber/RanNumReg_reg[5]_LDC_i_2_n_0 |                1 |              1 |
+|  RanNumber/RanNumReg_reg[1]_LDC_i_1_n_0 |                                                      | RanNumber/RanNumReg_reg[1]_LDC_i_2_n_0 |                1 |              1 |
+|  RanNumber/RanNumReg_reg[2]_LDC_i_1_n_0 |                                                      | RanNumber/RanNumReg_reg[2]_LDC_i_2_n_0 |                1 |              1 |
+|  RanNumber/RanNumReg_reg[7]_LDC_i_1_n_0 |                                                      | RanNumber/RanNumReg_reg[7]_LDC_i_2_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[6]_LDC_i_2_n_0 |                1 |              1 |
+|  RanNumber/RanNumReg_reg[8]_LDC_i_1_n_0 |                                                      | RanNumber/RanNumReg_reg[8]_LDC_i_2_n_0 |                1 |              1 |
+| ~Rst_IBUF_BUFG                          |                                                      | RanNumber/Target_ADDR_reg[2]_0         |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[3]_LDC_i_1_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[3]_LDC_i_2_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[2]_LDC_i_2_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[4]_LDC_i_1_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[6]_LDC_i_1_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[4]_LDC_i_2_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[5]_LDC_i_2_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[5]_LDC_i_1_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[1]_LDC_i_1_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[1]_LDC_i_2_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[2]_LDC_i_1_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[7]_LDC_i_2_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[7]_LDC_i_1_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[8]_LDC_i_2_n_0 |                1 |              1 |
+|  Clk_IBUF_BUFG                          |                                                      | RanNumber/RanNumReg_reg[8]_LDC_i_1_n_0 |                1 |              1 |
+|  outputclock_BUFG                       |                                                      | RanNumber/Rst_IBUF_BUFG_inst           |                2 |              2 |
+|  Clk_IBUF_BUFG                          | rannum_mem/counter_reg[31][0]                        | RanNumber/Rst_IBUF_BUFG_inst           |                1 |              6 |
+|  outputclock_BUFG                       | output_addr                                          | RanNumber/Rst_IBUF_BUFG_inst           |                2 |              6 |
+|  Clk_IBUF_BUFG                          | RanNumber/Target_ADDR_reg[6]_inv_n_0                 | RanNumber/Rst_IBUF_BUFG_inst           |                2 |              7 |
+|  Clk_IBUF_BUFG                          | rannum_mem/E[0]                                      |                                        |                2 |              8 |
+|  Clk_IBUF_BUFG                          | enable_IBUF                                          |                                        |                3 |              8 |
+|  Clk_IBUF_BUFG                          | target_mem_E/memory_target_ENCR_reg_0_63_0_2_i_1_n_0 |                                        |                3 |             12 |
+|  RanNumber/Target_ADDR_reg[6]_inv_n_0   |                                                      |                                        |                8 |             14 |
+|  Clk_IBUF_BUFG                          |                                                      |                                        |                6 |             16 |
+|  Clk_IBUF_BUFG                          |                                                      | clear                                  |                5 |             17 |
+|  Clk_IBUF_BUFG                          | Rst_IBUF_BUFG                                        |                                        |                3 |             20 |
+|  outputclock_BUFG                       | p_0_in                                               | RanNumber/Rst_IBUF_BUFG_inst           |                8 |             32 |
+|  outputclock_BUFG                       | start                                                | RanNumber/Rst_IBUF_BUFG_inst           |                8 |             32 |
+|  Clk_IBUF_BUFG                          | rannum_mem/sel                                       | RanNumber/Rst_IBUF_BUFG_inst           |               10 |             40 |
++-----------------------------------------+------------------------------------------------------+----------------------------------------+------------------+----------------+
+
+
